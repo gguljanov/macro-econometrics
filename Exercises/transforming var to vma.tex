@@ -1,0 +1,118 @@
+\begin{enumerate}
+    \item Using R, plot the Auto-correlation function (ACF) and the Partial Auto-correlation function (PACF) of the follwoing \ar{} and \ma{} models.
+
+    \begin{sol}
+        
+    \end{sol}
+
+    \item Finding the coefficients in the univariate case
+
+    \begin{sol}
+
+    \end{sol}
+
+    \item Consider the following VAR(1) process $y_t = \mu + \Phi_1 y_{t-1} + \nu_t$
+          \begin{align*}
+              \begin{pmatrix} y_{1,t} \\ y_{2,t} \\ y_{3,t} \end{pmatrix}
+               & = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+              + \begin{pmatrix}
+                    0.5 & 0   & 0   \\
+                    0.1 & 0.1 & 0.3 \\
+                    0   & 0.2 & 0.3
+                \end{pmatrix}
+              \begin{pmatrix}
+                  y_{1, {t-1}} \\ y_{2, {t-1}} \\ y_{3, {t-1}}
+              \end{pmatrix}
+              + \begin{pmatrix}
+                    \nu_{1,t} \\ \nu_{2,t} \\ \nu_{3,t}
+                \end{pmatrix}
+          \end{align*}
+          provided that $\nu_t \sim N(0, V)$ and
+          \[
+              V
+              = \begin{pmatrix}
+                  2.25 & 0 & 0 \\ 0 & 1 & 0.5 \\ 0 & 0.5 & 0.74
+              \end{pmatrix}
+          \]
+          Compute the coefficients $\Psi_0, \Psi_1, \dots \in \mathbb{R}^{3\times 3}$ of the lag polynomial $\Psi(L) := \sum_{i=0}^\infty \Psi_i L^i$, and a $c \in \mathbb{R}^3$ such that\footnote{Taken from \cite[][See section 16, "Understanding multivariate time series concepts"]{Mutschler-2018-github_repo}.}
+          \begin{align*}
+              y_t = c + \Psi(L) \nu_t
+          \end{align*}
+
+          \begin{sol}
+              We will use the very efficient method of matching coefficients to transform the \varp[1]{} model into a \vmaq[$\infty$]{} representation.
+              \begin{align*}
+                  y_t
+                   & = \Phi_1 y_{t-1} + \nu_t
+                  \\
+                  \underbrace{(I_3 - \Phi_1 L)}_{\Phi(L)} y_t
+                   & = \nu_t
+                  \\
+                  \Phi(L) y_t
+                   & = \nu_t
+                  \\
+                  \Phi(L)^{-1} \Phi(L) y_t
+                   & = \Phi(L)^{-1} \nu_t
+                  \\
+                  y_t
+                   & = \Phi(L)^{-1} \nu_t
+                   = c + \Psi(L) \nu_t
+                  \\
+                  \Rightarrow
+                   & c = 0,
+                   \Psi(L) = \Phi(L)^{-1}
+              \end{align*}
+              In the method of matching coefficient we compare the coefficient matrices multiplied to each power of $L$. That is, the expression on the left hand side has to match the expression on the right hand side. In our case:
+              \begin{align*}
+                  \Psi(L)
+                   & = \Phi(L)^{-1}
+                  \\
+                  \Phi(L) \Psi(L)
+                   & = I_3
+                  \\
+                  (I_3 - \Phi_1 L) \left(\sum_{i=0}^\infty \Psi_i L^i\right)
+                   & = I_3
+              \end{align*}
+
+              Expanding the two brackets:
+              \begin{align*}
+                  \Psi_0 L^0
+                   & + \Psi_1 L^1 + \Psi_2 L^2 + \dots
+                  \\
+                   & - \Phi_1 \Psi_0 L^1 - \Phi_1 \Psi_1 L^2 - \dots = I_3 L^0
+              \end{align*}
+
+              Finally, let us compare the expressions on the left hand side to those on the right hand side:
+              \begin{align}
+                  L^0
+                   & : \Phi_0 = I_3
+                   \Rightarrow
+                   \Phi_0 = I_3
+                  = \begin{pmatrix}
+                        1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+                    \end{pmatrix}
+                    \nonumber \\
+                  L^1
+                   & : \Phi_1 - A \Phi_0 = 0
+                   \Rightarrow
+                   \Phi_1 = A \Phi_0
+                  = A
+                  = \begin{pmatrix}
+                        0.5 & 0 & 0 \\ 0.1 & 0.1 & 0.3 \\ 0 & 0.2 & 0.3
+                    \end{pmatrix}
+                  \nonumber \\
+                  L^2
+                   & : \Phi_2 - A \Phi_1 = 0 
+                   \Rightarrow
+                   \Phi_2 = A \Phi_1
+                  = A^2
+                  = \begin{pmatrix}
+                        0.25 & 0 & 0 \\ 0.06 & 0.07 & 0.12 \\ 0.02 & 0.08 & 0.15
+                    \end{pmatrix}
+                  \nonumber \\
+                  & \vdots
+                  \nonumber \\
+                  \text{In general} & : \Phi_s = A^s \label{allg}
+              \end{align}
+          \end{sol}
+\end{enumerate}

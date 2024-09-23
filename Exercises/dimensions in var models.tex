@@ -1,0 +1,31 @@
+Let $y_t$ be a $N$-dimensional covariance stationary random vector. Consider the \varp[p]{}-process
+\begin{align*}
+    y_t = \mu + \sum_{i=1}^p \Phi_i y_{t-i} + \nu_t, \quad \nu \sim N(0, V)
+\end{align*}
+
+\begin{enumerate}
+    \item What are the dimensions of $\mu$, $\Phi_i$ and $\nu_t$?
+
+          \begin{sol}
+              $\mu$ and $u_t$ are both $N$-dimensional vectors: $\mu, \nu_t \in \mathbb{R}^{N \times 1}$.
+
+              $\Phi_i$ is a $N \times N$-Matrix.
+          \end{sol}
+
+    \item Consider a \varp[2]{} model with $N=4$ variables and a constant term. How many parameters do we need to estimate?
+
+          \begin{sol}
+              In general, there are $N + N^2 \times p + N (N + 1) / 2$:
+              \begin{enumerate}[label=-]
+                  \item $\mu$ contains $N$ parameters
+
+                  \item $\Phi_i$ contains $N^2$ parameters and there are $p$ of them $\Rightarrow$ $p \times N^2$
+
+                  \item The covariance matrix $V$ contains $N (N + 1) / 2$ parameters (Note: since the covariance matrix is symmetric, we should consider either only upper half or only lower half of the matrix, together with the diagonal)
+              \end{enumerate}
+
+              In our specific case the number of parameters is then
+              \[ 4 + 4^2 \cdot 2 + 4 \cdot (4 + 1) / 2 = 46. \]
+              That's a lot! Therefore we will try to restrict some parameters (e.g. set equal to zero) or consider only small VAR systems, e.g. $N=3$ and $p=1$.
+          \end{sol}
+\end{enumerate}

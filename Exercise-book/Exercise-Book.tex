@@ -1,0 +1,299 @@
+\documentclass[11pt]{article}
+
+% === Packages ===
+\usepackage[a-1b]{pdfx}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}[section]
+
+\usepackage{amsfonts}
+
+\usepackage{nicefrac}
+
+\usepackage{graphicx}
+
+\usepackage{multirow}
+
+% For using \toprule and \midrule in the tables
+\usepackage{booktabs}
+
+\usepackage{caption}
+
+\usepackage{dcolumn}
+
+\usepackage{siunitx}
+
+% Change the title format
+\usepackage[explicit]{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{%
+    Ch. \thesection ~ -- ~ #1%
+}
+\titleformat{\subsection}{\normalfont\large\bfseries}{}{0em}{%
+    Ex. \thesubsection ~ -- ~ #1%
+}
+
+% Enumerating items
+\usepackage{enumitem}
+\setlist[enumerate]{font=\bfseries, label=(\alph*)} %, itemsep=0.5cm}
+
+% Set bookmarks for sections, equations etc.
+% \usepackage[bookmarks, bookmarksopen, bookmarksdepth=3]{hyperref}
+\hypersetup{bookmarksnumbered}
+
+% % Different colors for font and the background
+% \usepackage[dvipsnames]{xcolor}
+
+% Cancel by striking through
+\usepackage{cancel}
+
+% Set the space between lines
+\usepackage{setspace}
+
+% Include code chunks beautifully
+\usepackage{listingsutf8}
+\lstset{
+    language=R,
+    frame=tb,
+    basicstyle=\ttfamily\footnotesize,
+    alsoletter={.},
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    showstringspaces=false
+}
+
+% References
+\usepackage[citestyle=alphabetic, bibstyle=authortitle]{biblatex}
+\addbibresource{biblio.bib}
+
+% \today and \currentime commands
+\usepackage{datetime}
+
+% \usepackage{todonotes}
+% \usepackage{tikz}
+
+% Space between lines
+\usepackage{setspace}
+\linespread{1.2}
+
+% Page margins
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2cm]{geometry}
+
+% Space between paragraphs
+\usepackage{parskip}
+
+% Paragraph indentation
+\setlength{\parindent}{0pt}
+
+
+% === Commands ===
+% Expectation operator
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\Var}{\mathbb{V}ar}
+\DeclareMathOperator*{\Cov}{\mathbb{C}ov}
+
+% Colored cancel
+\newcommand*{\Ccancel}[2][black]{
+    \renewcommand{\CancelColor}{\color{#1}}{\cancel{#2}}
+}
+
+\newtheorem*{definition*}{Definition}
+
+% Writing ß with \3
+\let\3 = \ss
+
+\newcommand*{\iid}{\overset{\text{iid}}{\sim}}
+
+% Writing code and output
+\newcommand*{\writeCode}{
+    \vspace{0.3cm}
+    \textcolor{black}{\underline{\textbf{Code}}}:
+}
+
+\newcommand*{\writeOutput}{
+    \vspace{0.3cm}
+    \textcolor{black}{\underline{\textbf{Output}}}:
+    \vspace{-0.8cm}
+}
+
+
+% === Others ===
+% Allows box-overflow amount before a warning message is issued
+\hfuzz=6000pt
+
+% Allows to control the space added before the math equations
+\abovedisplayskip=-0.2cm
+\abovedisplayshortskip=-0.2cm
+
+% Allows to control the space added after the math equations
+\belowdisplayskip=-0.2cm
+\belowdisplayshortskip=-0.2cm
+
+% Allows the align math expression be broken into pages at the output pdf
+\allowdisplaybreaks
+
+% Check mark and X mark
+\usepackage{pifont}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% Wide hat
+\usepackage{scalerel, stackengine}
+\stackMath
+
+\newcommand\reallywidehat[1]{%
+    \savestack{\tmpbox}{\stretchto{%
+            \scaleto{%
+                \scalerel*[\widthof{\ensuremath{#1}}]{%
+                    \kern-.6pt\bigwedge\kern-.6pt%
+                }{
+                    \rule[-\textheight/2]{1ex}{\textheight}
+                }%WIDTH-LIMITED BIG WEDGE
+            }{\textheight}% 
+        }{1ex}}%
+    \stackon[1pt]{#1}{\tmpbox}%
+}
+
+%  === Abbreviations and Acronyms ===
+\newcommand{\ols}{Ordinary Least Squares}
+\newcommand{\ml}{Maximum Likelihood}
+
+\newcommand*{\ar}{AR}
+\newcommand*{\arp}[1][p]{AR(#1)}
+
+\newcommand*{\var}{VAR}
+\newcommand*{\varp}[1][p]{VAR(#1)}
+
+\newcommand*{\svar}{SVAR}
+\newcommand*{\svarp}[1][p]{SVAR(#1)}
+
+\newcommand*{\ma}{MA}
+\newcommand*{\maq}[1][q]{MA(#1)}
+
+\newcommand*{\vma}{VMA}
+\newcommand*{\vmaq}[1][q]{VMA(#1)}
+
+\newcommand*{\arma}{ARMA}
+\newcommand*{\armapq}[1][p, q]{ARMA(#1)}
+
+\newcommand*{\varma}{VARMA}
+\newcommand*{\varmapq}[1][p, q]{VARMA(#1)}
+
+\newcommand*{\arima}{ARIMA}
+\newcommand*{\arimapdq}[1][p, d, q]{ARIMA(#1)}
+
+\newcommand*{\arch}{ARCH}
+\newcommand*{\archp}[1][p]{ARCH(#1)}
+
+\newcommand*{\garch}{GARCH}
+\newcommand*{\garchpq}[1][p, q]{GARCH(#1)}
+
+
+% === Solutions open/closed ===
+% \usepackage{answers}
+\usepackage[nosolutionfiles]{answers}
+
+\renewcommand{\solutionstyle}[1]{\textbf{Sol. #1}:\hspace*{\textwidth}}
+% \newcommand\preSolution{\hfill}
+\newcommand\postSolution{\hfill\textbf{End of solution}\vspace*{0.8cm}}
+
+\Newassociation{sol}{Solution}{ans}
+
+% === Font ===
+\usepackage{newpxtext, newpxmath}
+
+
+% === Document begins ===
+\begin{document}
+
+\Opensolutionfile{ans}[ans]
+
+\title{Macro-Econometrics --- Exercise Book}
+
+\author{}
+
+\date{This version: \today ~\currenttime}
+
+\maketitle
+
+% === References ===
+The references for this tutorial are
+\begin{enumerate}[label=\roman*.]
+    \item \cite{MartinHurnHarris-2012}
+    \item \cite{Mutschler-2018-github_repo}
+    \item Other explicit citations within the text
+\end{enumerate}
+
+% % === Exercises ===
+% % Intro
+% \subsection{Introduction to Macroeconometrics\texorpdfstring{%
+%         \protect\footnote{Taken from \cite[][see the section no 1, titled ``Macroeconometrics''.]{Mutschler-2018-github_repo}}%
+%     }{}}
+% \input{../Exercises/introduction to macroeconometrics.tex}
+
+% % From univariate to multivariate models
+% \subsection{From univariate to multivariate models}
+% \input{../Exercises/from univariate to multivariate models.tex}
+
+% % Dimensions in VAR models
+% \subsection{Dimensions in \texorpdfstring{\varp{}}{VAR} models\texorpdfstring{%
+%         \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
+%     }{}
+% }
+% \input{../Exercises/dimensions in var models.tex}
+
+% % Dimensions in SVAR models
+% \subsection{Dimensions in \texorpdfstring{\svarp{}}{SVAR} models\texorpdfstring{%
+%         \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
+%     }{}}
+% \input{../Exercises/dimensions in svar models.tex}
+
+% % Identification in SVAR models
+% \subsection{Identification in \texorpdfstring{\svar{}}{SVAR} models\texorpdfstring{%
+%         \protect\footnote{Based on \cite[][see pages 332-334]{Hamilton-1994} and \cite[][see chapter 14]{MartinHurnHarris-2012}.}%
+%     }{}}
+% \input{../Exercises/identification in svar models.tex}
+
+\subsection{Stationarity in univariate case\texorpdfstring{%
+    \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
+}{}}
+\input{../Exercises/stationarity in univariate case.tex}
+
+\subsection{Stationarity in multivariate case}
+\input{../Exercises/stationarity in multivariate case.tex}
+
+\subsection{Theoretical and simulated moments\texorpdfstring{%
+    \protect\footnote{Taken from \cite[][see Sectiona 18, "Theoretical and simulated moments]{Mutschler-2018-github_repo}}%
+}{}}
+\input{../Exercises/theoretical and simulated moments.tex}
+
+\subsection{Transforming a VAR to a VMA}
+\input{../Exercises/transforming var to vma.tex}
+
+% \subsection{Estimation of VAR models}
+% \input{../Exercises/estimation of var models.tex}
+
+% Information criteria and Hypothesis tests
+
+% Granger Causality
+
+% IRFs
+
+% Variance Decomposition
+
+% SVAR: short-run identification
+
+% SVAR: long-run identification
+
+% SVAR: short- and long-run identification
+
+% SVAR: sign restrictions identification
+
+\Closesolutionfile{ans}
+
+\end{document}

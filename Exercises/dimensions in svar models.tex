@@ -1,0 +1,32 @@
+Let $y_t$ be a $N$-dimensional covariance stationary random vector and $K$ be the number of relationships in $y_t$. Consider the \varp[p]{}-process
+\begin{align*}
+    B_0 y_t = \gamma + \sum_{i=1}^p B_i y_{t-i} + u_t, \quad u_t \sim N(0, D)
+\end{align*}
+
+\begin{enumerate}
+    \item What are the dimensions of $\gamma$, $B_0$, $B_i$, and $u_t$?
+
+          \begin{sol}
+              $\gamma$ and $u_t$ are both $N$-dimensional vectors: $\mu, \nu_t \in \mathbb{R}^{N \times 1}$.
+
+              $B_0$ and $B_i$ are $N \times N$-Matrices.
+          \end{sol}
+
+    \item Consider a \svarp[2]{} model with $N=4$ variables, $K=2$ relationships in $y_t$ and a constant term. How many parameters do we need to estimate?
+
+          \begin{sol}
+              In general, there are $NK + N + N^2 \times p + N$:
+              \begin{enumerate}[label=-]
+                  \item $B_0$ contains $N \times K$ parameters
+
+                  \item $\gamma$ contains $N$ parameters
+
+                  \item $B_i$ contains $N^2$ parameters and there are $p$ of them $\Rightarrow$ $p \times N^2$
+
+                  \item The covariance matrix $D$ contains $N$ parameters (Note that the covariance matrix $D$ is diagonal)
+              \end{enumerate}
+
+              In our specific case the number of parameters is then
+              \[ 4 \times 2 + 4 + 4^2 \times 2 + 4 = 48. \]
+          \end{sol}
+\end{enumerate}

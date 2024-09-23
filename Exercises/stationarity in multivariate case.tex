@@ -1,0 +1,111 @@
+\begin{enumerate}
+    \item How does the definition of covariance stationarity change in the multivariate case?\footnote{Taken from \cite[][See section 16, "Understanding multivariate time series concepts"]{Mutschler-2018-github_repo}.}
+
+          \begin{sol}
+              Basically, it is the same: A stochastic process is called weakly stationary (or covariance stationary), if for each period in time, it has the same expectation and variance, independent of time, and the autocovariance between two points in time is only dependent on the distance of these two points. In the multivariate case, we now also consider the autocovariances between different variables and require these to be only dependent on the distance in time, not on time itself.
+
+              \begin{definition}
+                  The K-dimensional stochastic process $y_t$ is called covariance stationary, if for all $h,t,\tau \in \mathbb{Z}$:
+                  \begin{align}
+                      \E[{y_t}]
+                       & = \E[{y_\tau}]
+                      \\
+                      \Var(y_t) 
+                      & = \Var(y_\tau)
+                      \\
+                      \Cov(y_{t},y_{t-h})
+                       & = \Cov(y_{t+\tau}, y_{t-h+\tau})
+                  \end{align}
+              \end{definition}
+          \end{sol}
+
+    \item Interpret $\E[y_t]$ and $\Gamma_h := \Cov(y_{t},y_{t-h})$\footnote{Taken from \cite[][See section 16, "Understanding multivariate time series concepts"]{Mutschler-2018-github_repo}.}.
+          \begin{sol}
+              \emph{Interpretation of $\E[y_t]$:} Each component of $y_t$ has its own expectation. $\E[y_t]$ is the unconditional expectation of $y_t$ at time point $t$. The expectation as a linear operator can go into a vector or matrix:
+              \begin{align*}
+                  \E[y_t]
+                  = \E\left[
+                      \begin{pmatrix}
+                          y_{1,t} \cr \vdots \cr y_{K,t}
+                      \end{pmatrix}
+                      \right]
+                  = \begin{pmatrix}
+                        \E[y_{1,t}] \cr \vdots \cr \E[y_{K,t}]
+                    \end{pmatrix}
+              \end{align*}
+
+
+              \emph{Interpretation of $\Gamma_y(h)$:} In the univariate case, we define the autocovariance as the covariance of a random variable with its own lagged values. In the multivariate case, we also consider covariances between different variables. To this end, we want to summarize the covariance between different variables and different points in time. The Autocovariance matrix \[ {\Gamma_y(h)} := \Cov[{y_{t},{y_{t-h}}}] \] sums this information up in a neat fashion and is therefore a powerful tool in multivariate time series analysis:
+              \begin{align*}
+                  \Cov[{y_{t}, {y_{t-h}}}]
+                   & = \E\left[
+                      ({y_{t}} - \E[{{y_{t}}}])
+                      ({y_{t-h}} - \E[{{y_{t-h}}}])'
+                      \right]
+                  \\[0.5cm]
+                   & = \E\left[
+                      \begin{pmatrix}
+                          y_{1,t} - \E[y_{1,t}]
+                          \cr \vdots
+                          \cr y_{K,t} - \E[y_{K,t}]
+                      \end{pmatrix}
+                      \begin{pmatrix}
+                          y_{1,{t-h}} - \E[y_{1,{t-h}}]
+                           & \dots
+                           & y_{K,{t-h}} - \E[y_{K,{t-h}}]
+                      \end{pmatrix}
+                      \right]
+                  \\[0.5cm]
+                   & = \E\left[
+                      \begin{pmatrix}
+                          (y_{1,t}- \E[y_{1,t}])(y_{1,{t-h}} - \E[y_{1,{t-h}}])
+                           & \dots
+                           & (y_{1,t} - \E[y_{1,t}])(y_{K,{t-h}} - \E[y_{K,{t-h}}])
+                          \\
+                          \vdots
+                           & \ddots
+                           & \vdots
+                          \\
+                          (y_{K,t}- \E[y_{K,t}])(y_{1,{t-h}} - \E[y_{1,{t-h}}])
+                           & \dots
+                           & (y_{K,t} - \E[y_{K,t}])(y_{K,{t-h}} - \E[y_{K,{t-h}}])
+                      \end{pmatrix}
+                      \right]
+                  \\[0.5cm]
+                   & = \begin{pmatrix}
+                           \E[(y_{1,t}- \E[y_{1,t}])(y_{1,{t-h}} - \E[y_{1,{t-h}}])]
+                            & \dots
+                            & \E[(y_{1,t} - \E[y_{1,t}])(y_{K,{t-h}} - \E[y_{K,{t-h}}])]
+                           \\
+                           \vdots
+                            & \ddots
+                            & \vdots
+                           \\
+                           \E[(y_{K,t}- \E[y_{K,t}])(y_{1,{t-h}} - \E[y_{1,{t-h}}])]
+                            & \dots
+                            & \E[(y_{K,t} - \E[y_{K,t}])(y_{K,{t-h}} - \E[y_{K,{t-h}}])]
+                       \end{pmatrix}
+                  \\[0.5cm]
+                   & =\begin{pmatrix}
+                          \Cov(y_{1,t},y_{1,{t-h}})
+                           & \dots
+                           & \Cov(y_{1,t},y_{K,{t-h}})
+                          \\
+                          \vdots
+                           & \ddots
+                           & \vdots
+                          \\
+                          \Cov(y_{K,t},y_{1,{t-h}})
+                           & \dots
+                           & \Cov(y_{K,t},y_{K,{t-h}})
+                      \end{pmatrix}
+              \end{align*}
+              On the diagonals, we have the autocovariance of each variable, on the off-diagonals we have the covariances between the different variables.
+          \end{sol}
+
+    \item Show that the following \varp[2]{} process is covariance stationary.
+
+    \begin{sol}
+        
+    \end{sol}
+\end{enumerate}

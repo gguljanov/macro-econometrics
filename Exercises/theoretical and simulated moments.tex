@@ -1,0 +1,75 @@
+\begin{enumerate}
+\item Derive the theoretical mean ($\mu_y$), covariance matrix ($\Gamma(0)$) and autocovariance matrix ($\Gamma(h)$) of the covariance stationary \varp[1]{} model: $y_t = \mu + \Phi y_{t-1} + \nu_t, \quad \nu_t \sim N(0, V)$
+
+\begin{sol}
+    \textbf{Mean:} \\
+    \begin{align*}
+        \underbrace{\E(y_t)}_{\mu_y}
+        & = \underbrace{\E(\mu)}_{\mu}
+        + \underbrace{\E(\Phi y_{t-1})}_{\Phi \mu_y}
+        + \underbrace{\E(\nu_t)}_{0}
+        \\
+        \Leftrightarrow \mu_y      
+        & = (I - \Phi)^{-1} \mu
+    \end{align*}
+    Put $\mu = (I - \Phi) \mu_y:
+    \underbrace{y_t -\mu_y}_{ \tilde{y}_{t}}
+    = \Phi (\underbrace{y_{t-1} - \mu_y}_{\tilde{y}_{t-1}})
+    + u_t$.
+
+
+    \textbf{Covariance matrix and Autocovariance matrix:} \\
+    Note: $\Gamma_y(h) = \Gamma_{\tilde{y}}(h)$
+    \begin{align*}
+        \Gamma_y(0)
+        & = \E\left[\tilde{y}_t \tilde{y}_t'\right]
+        = \E\left[(\Phi \tilde{y}_{t-1} + \nu_t)(\Phi \tilde{y}_{t-1} + \nu_t)'\right]
+        \\
+        & = \Phi \underbrace{\E\left[\tilde{y}_{t-1}\right]}_{\Gamma_y(0)} \Phi'
+        + \Phi \underbrace{\E\left[\tilde{y}_{t-1}\nu_t'\right]}_{0}
+        + \underbrace{\E\left[\nu_t \tilde{y}_{t-1}'\right]}_{0} \Phi'
+        + \underbrace{\E\left[\nu_t \nu_t'\right]}_{V}
+        \\
+        \Leftrightarrow \Gamma_y(0)
+        & = \Phi \Gamma_y(0) \Phi' + V
+    \end{align*}
+    This is a discrete Lyapunov matrix equation, see exercise 1.5:
+    \[
+        vec\bigg( \Gamma_y(0) \bigg)
+        = \bigg( I - \Phi \otimes \Phi \bigg)^{-1} vec\bigg( \Sigma_u \bigg)
+    \]
+    \begin{align*}
+        \Gamma_y(1)
+        & = \E\left[\tilde{y}_t \tilde{y}_{t-1}'\right]
+        = \E\left[(\Phi \tilde{y}_{t-1} + \nu_t)\tilde{y}_{t-1}'\right]
+        = \Phi \E\underbrace{
+            \left[\tilde{y}_{t-1}\tilde{y}_{t-1}'\right]
+        }_{\Gamma_y(0)}
+        + \underbrace{\E\left[\nu_t y_{t-1}'\right]}_{0}
+        = \Phi \Gamma_y(0)
+        \\
+        \Gamma_y(2)
+        & =  \E\left[\tilde{y}_t \tilde{y}_{t-2}'\right]
+        = \E\left[(\Phi \tilde{y}_{t-1} + \nu_t)\tilde{y}_{t-2}'\right]
+        = \Phi \Gamma_y(1) = \Phi^2 \Gamma_y(0)
+        \\
+        \Gamma_y(h)
+        & = \Phi^h \Gamma_y(0)
+    \end{align*}
+\end{sol}
+
+\item Simulate $R = 100$ datasets each with $T = 100$ observations for
+\begin{align*}
+    y_t = \begin{pmatrix}0.2 &0.3 \\-0.6 & 1.1 \end{pmatrix} y_{t-1}  + \nu_t
+\end{align*}
+provided that $\nu_t \sim N(0, V)$ and $V = \begin{pmatrix}
+    0.9 & 0.2 \\ 0.2 & 0.5
+\end{pmatrix}$.
+
+Compute the sample mean and sample covariance matrix. Compare the results with parts (1) and (2). How does your choice of $R$ or $T$ change results?
+
+\begin{sol}
+  \lstinputlisting{../R-files/var1_simulate_moments.R}
+    The Monte Carlo shows that either increasing $R$ or $T$ (or both) captures the moments better.
+\end{sol}
+\end{enumerate}
