@@ -40,6 +40,8 @@
 \usepackage{enumitem}
 \setlist[enumerate]{font=\bfseries, label=(\alph*)} %, itemsep=0.5cm}
 
+\usepackage{scrextend}
+
 % Set bookmarks for sections, equations etc.
 % \usepackage[bookmarks, bookmarksopen, bookmarksdepth=3]{hyperref}
 \hypersetup{bookmarksnumbered}
@@ -230,6 +232,10 @@ The references for this tutorial are
 \end{enumerate}
 
 % % === Exercises ===
+% EUROSTAT with r
+\subsection{EUROSTAT with R}
+\input{../Exercises/eurostat with r.tex}
+
 % % Intro
 % \subsection{Introduction to Macroeconometrics\texorpdfstring{%
 %         \protect\footnote{Taken from \cite[][see the section no 1, titled ``Macroeconometrics''.]{Mutschler-2018-github_repo}}%
@@ -260,16 +266,16 @@ The references for this tutorial are
 % \input{../Exercises/identification in svar models.tex}
 
 \subsection{Stationarity in univariate case\texorpdfstring{%
-    \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
-}{}}
+        \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
+    }{}}
 \input{../Exercises/stationarity in univariate case.tex}
 
 \subsection{Stationarity in multivariate case}
 \input{../Exercises/stationarity in multivariate case.tex}
 
 \subsection{Theoretical and simulated moments\texorpdfstring{%
-    \protect\footnote{Taken from \cite[][see Sectiona 18, "Theoretical and simulated moments]{Mutschler-2018-github_repo}}%
-}{}}
+        \protect\footnote{Taken from \cite[][see Sectiona 18, "Theoretical and simulated moments]{Mutschler-2018-github_repo}}%
+    }{}}
 \input{../Exercises/theoretical and simulated moments.tex}
 
 \subsection{Transforming a VAR to a VMA}

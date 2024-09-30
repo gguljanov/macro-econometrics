@@ -1,0 +1,37 @@
+Throughout the course and its tutorials, we will use data sets from Eurostat. There are basically two ways of accessing the data sets: (i) one can manually download the data sets or (ii) one can install the r package \texttt{eurostat} (\cite{LahtiHuovariKainuBiecek-2017}, \cite{eurostat-noyear}) to do it automatically. Below, we will discuss the second way of accessing the data sets, as we are planning to use it for the course.
+
+First, we have to install the r package which can be done with the following command: \newline
+\verb|install.packages("eurostat")|. Three functions from this package are very important for us:
+\begin{enumerate}[label=\roman*.]
+    \item \verb|get_eurostat_toc()| -- for getting the table of contents (TOC)
+
+    \item \verb|search_eurostat()| -- for searching for data sets
+
+          The function requires the following input arguments:
+          \begin{labeling}{argument}
+              \item[pattern:] Search pattern
+
+              \item[type:] With this argument, the user can choose which types of datasets the search should return: datasets, tables, folders or all types (the default).
+
+              \item[fixed:] Should the exact match to pattern be searched for?
+          \end{labeling}
+
+    \item \verb|get_eurostat()| -- for downloading a data set
+          \begin{labeling}{argument}
+              \item[id:] This is a dataset code
+
+              \item[filters:] This argument is used to filter out data and only get those that are required. The R-script below uses filters to take the GDP of EA, DE, IT, FR; till Period 2024; Gross domestic product at market prices; Chain linked volumes, index 2010=100; seasonally and calendar adjusted.
+
+              \item[cache:]
+          \end{labeling}
+\end{enumerate}
+
+The following R-script is a small example for using these functions: \lstinputlisting{../R-files/eurostat_with_r.R}
+
+\textbf{Further information:} The end user does not usually have to bother where original data is downloaded, as both data sources are accessed via the main download function \verb|get_eurostat()|. If only the table id is given, the whole table is downloaded from the SDMX 2.1 REST API. If any filters are given the JSON API is used instead. However, the \verb|get_eurostat_json()| function used internally is also a user-facing function so that can be used as well.
+
+New function in the eurostat package version 4.0.0 is the \verb|get_eurostat_interactive()| function that allows users to search and download datasets with the help of interactive menus. If the user already knows which dataset they want to download, the \verb|get_eurostat_interactive()| function can also take a dataset code as a parameter, skipping the search part of the interactive menu. Below we will demonstrate the whole process from search to download to printing a citation for the dataset, utilizing several different eurostat package functions at once.
+
+\url{https://ropengov.github.io/eurostat/articles/eurostat_tutorial.html}
+
+\url{https://ropengov.github.io/eurostat/reference/get_eurostat.html#ref-examples}

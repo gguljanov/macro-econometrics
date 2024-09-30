@@ -1,15 +1,91 @@
 \begin{enumerate}
-    \item Using R, plot the Auto-correlation function (ACF) and the Partial Auto-correlation function (PACF) of the follwoing \ar{} and \ma{} models.
+    \item Using R, plot the Auto-correlation function (ACF) and the Partial Auto-correlation function (PACF) of the following models, using \verb|ARMAacf(...)|:
+          \begin{align*}
+              y_t
+               & = \theta y_{t-1} + \nu_t,
+              \\
+              \tilde y_t
+               & = \nu_t + \theta \nu_{t-1},
+          \end{align*}
+          where, $\nu_t \sim N(0, 1)$ and $\theta = 0.45$.
 
-    \begin{sol}
-        
-    \end{sol}
+          \begin{sol}
+              \lstinputlisting{../R-files/simulate_ar1_ma1.R}
+          \end{sol}
 
-    \item Finding the coefficients in the univariate case
+    \item Determine the first four coefficients of the \maq[$\infty$]{} representation of the following \arp[1]{} process:
+          \[ y_t = 0.25 y_{t-1} + \nu_t \]
 
-    \begin{sol}
+          \begin{sol}
+              Let us rewrite the above process:
+              \begin{align*}
+                  y_t              & = 0.25 y_{t-1} + \nu_t \\
+                  y_t - 0.25 L y_t & = \nu_t                \\
+                  (1 - 0.25L) y_t  & = \nu_t                \\
+                  \phi(L) y_t      & = \theta(L) \nu_t
+              \end{align*}
+              where, $\theta(L) = 1$.
 
-    \end{sol}
+              Under the assumption that all roots of $\phi(z)=0$ are outside the unit circle, we can write the \armapq{} process as \maq[$\infty$]{}.
+
+              Formally, we have
+              \begin{align*}
+                  y_t & = \frac{\theta(L)}{\phi(L)}\epsilon_t \\
+                      & = \psi(L)\epsilon_t
+              \end{align*}
+              with
+              \begin{align*}
+                  \psi(L) & = \sum_{j=0}^{\infty}\psi_{j}L^{j}              \\
+                          & = (\psi_0+\psi_1 L+\psi_2 L^2+\psi_3 L^3+\dots)
+              \end{align*}
+
+              By identification,
+              \begin{align*}
+                  \frac{\theta(z)}{\phi(z)}
+                   & = \psi(z)                                          \\
+                   & \Downarrow                                         \\
+                  (\psi_0+\psi_1 z+\psi_2 z^2+\psi_3 z^3+\dots) \times ~~~
+                   &                                                    \\
+                  (1-\phi_1 z -\phi_2 z^2-\dots -\phi_p z^p)
+                   & = (1+\theta_1 z +\theta_2 z^2+\dots +\theta_q z^q)
+              \end{align*}
+
+              By applying this rule to the process here, we have:
+              \begin{align*}
+                  (\psi_0 + \psi_1 z + \psi_2 z^2 + \psi_3 z^3 + \dots)
+                  (1 - 0.25z)
+                   & = 1
+                  \\
+                   & \Downarrow
+                  \\
+                  \colorbox{lightgray}{$\psi_0$}
+                  + \colorbox{pink}{$\psi_1 z$}
+                  + \colorbox{yellow}{$\psi_2 z^2$}
+                  + \colorbox{lime}{$\psi_3 z^3$}
+                  + \quad \dots \quad
+                   &
+                  \\
+                  \colorbox{pink}{$-0.25 \psi_0 z$}
+                  + \colorbox{yellow}{$(-0.25 \psi_1 z^2)$}
+                  + \colorbox{lime}{$(-0.25 \psi_2 z^3)$}
+                  + (-0.25 \psi_3 z^4)
+                  + \quad \dots \quad
+                   & =
+                  \colorbox{lightgray}{$1$}
+                  + \colorbox{pink}{($0 \times z$)}
+                  + \colorbox{yellow}{$(0 \times z)$}
+                  + \colorbox{lime}{$(0 \times z)$}
+              \end{align*}
+              \begin{align*}
+                  \psi_0            & = 1                                \\
+                  \psi_1-0.25\psi_0 & = 0 \Rightarrow \psi_1 = 0.25      \\
+                  \psi_2-0.25\psi_1 & = 0 \Rightarrow \psi_2 = 0.0625    \\
+                  \psi_3-0.25\psi_2 & = 0 \Rightarrow \psi_3 =  0.015625 \\
+                                    & \vdots
+              \end{align*}
+              For $j \geq 1$,
+              \[ \psi_j-0.25 = 0 \]
+          \end{sol}
 
     \item Consider the following VAR(1) process $y_t = \mu + \Phi_1 y_{t-1} + \nu_t$
           \begin{align*}
@@ -56,11 +132,11 @@
                   \\
                   y_t
                    & = \Phi(L)^{-1} \nu_t
-                   = c + \Psi(L) \nu_t
+                  = c + \Psi(L) \nu_t
                   \\
                   \Rightarrow
                    & c = 0,
-                   \Psi(L) = \Phi(L)^{-1}
+                  \Psi(L) = \Phi(L)^{-1}
               \end{align*}
               In the method of matching coefficient we compare the coefficient matrices multiplied to each power of $L$. That is, the expression on the left hand side has to match the expression on the right hand side. In our case:
               \begin{align*}
@@ -85,33 +161,33 @@
               Finally, let us compare the expressions on the left hand side to those on the right hand side:
               \begin{align}
                   L^0
-                   & : \Phi_0 = I_3
-                   \Rightarrow
-                   \Phi_0 = I_3
+                                    & : \Phi_0 = I_3
+                  \Rightarrow
+                  \Phi_0 = I_3
                   = \begin{pmatrix}
                         1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
                     \end{pmatrix}
-                    \nonumber \\
+                  \nonumber                                       \\
                   L^1
-                   & : \Phi_1 - A \Phi_0 = 0
-                   \Rightarrow
-                   \Phi_1 = A \Phi_0
+                                    & : \Phi_1 - A \Phi_0 = 0
+                  \Rightarrow
+                  \Phi_1 = A \Phi_0
                   = A
                   = \begin{pmatrix}
                         0.5 & 0 & 0 \\ 0.1 & 0.1 & 0.3 \\ 0 & 0.2 & 0.3
                     \end{pmatrix}
-                  \nonumber \\
+                  \nonumber                                       \\
                   L^2
-                   & : \Phi_2 - A \Phi_1 = 0 
-                   \Rightarrow
-                   \Phi_2 = A \Phi_1
+                                    & : \Phi_2 - A \Phi_1 = 0
+                  \Rightarrow
+                  \Phi_2 = A \Phi_1
                   = A^2
                   = \begin{pmatrix}
                         0.25 & 0 & 0 \\ 0.06 & 0.07 & 0.12 \\ 0.02 & 0.08 & 0.15
                     \end{pmatrix}
-                  \nonumber \\
-                  & \vdots
-                  \nonumber \\
+                  \nonumber                                       \\
+                                    & \vdots
+                  \nonumber                                       \\
                   \text{In general} & : \Phi_s = A^s \label{allg}
               \end{align}
           \end{sol}
