@@ -1,0 +1,168 @@
+\begin{labeling}{argument}
+    \item[\textbf{Matrix:}] A rectangular array of real numbers:
+    \[
+        \begin{bmatrix}
+            a_{11} & a_{12} & \ldots a_{1n} \\
+            a_{21} & a_{22} & \ldots a_{2n} \\
+            \vdots & \vdots & \vdots        \\
+            a_{m1} & a_{m2} & \ldots a_{mn}
+        \end{bmatrix}
+    \]
+
+    \item[\textbf{Addition:}] Adding two matrices is adding the respective elements:
+    \[ A + B = (a_{ij}) + (b_{ij}) = (a_{ij} + b_{ij}). \]
+    Note that the dimensions of the summands must be the same.
+
+    \textbf{Exercise:} Do the following addition:
+    \[
+        \begin{bmatrix}
+            1  & 12 & 8  \\
+            15 & 6  & 10
+        \end{bmatrix}
+        +
+        \begin{bmatrix}
+            3   & 2 & 16  \\
+            -14 & 7 & -11
+        \end{bmatrix}
+        =
+        ?
+    \]
+
+    \begin{sol}
+        \[
+            \begin{bmatrix}
+                4 & 14 & 24 \\
+                1 & 13 & -1
+            \end{bmatrix}
+        \]
+    \end{sol}
+
+
+    \item[\textbf{Multiplication:}] Multiply each row of the first matrix with each column of the second matrix, element-wise and take sum. Order of the row and column gives the place of the sum in the resulting matrix:
+    \[
+        AB = \bigg( \sum_{j=1}^n a_{ij} b_{jk} \bigg)
+    \]
+
+    \textbf{Exercise:} Do the following multiplication:
+    \[
+        \begin{bmatrix}
+            2  & -7 \\
+            -9 & 5  \\
+            4  & 3
+        \end{bmatrix}
+        \times
+        \begin{bmatrix}
+            -6 & 1 \\
+            3  & 8
+        \end{bmatrix}
+        =
+        ?
+    \]
+
+    \begin{sol}
+        \[
+            \begin{bmatrix}
+                2 \times (-6) + (-7) \times 3
+                 & 2 \times 1 + (-7) \times 8 \\
+                -9 \times (-6) + 5 \times 3
+                 & -9 \times 1 + 5 \times 8   \\
+                4 \times (-6) + 3 \times 3
+                 & 4 \times 1 + 3 \times 8
+            \end{bmatrix}
+            =
+            \begin{pmatrix}
+                -33 & -54 \\
+                69  & 31  \\
+                -15 & 28
+            \end{pmatrix}
+        \]
+    \end{sol}
+
+    \item[\textbf{Transpose:}] Turning rows into columns or vice versa:
+    \[
+        (a'_{ij}) = (a_{ji})
+    \]
+
+    \textbf{Exercise:} Take the transpose of the following matrix
+
+    \[
+        A = \begin{bmatrix}
+            2  & -7 \\
+            -9 & 5  \\
+            4  & 3
+        \end{bmatrix}
+    \]
+
+    \begin{sol}
+        \[
+            A' = \begin{bmatrix}
+                2  & -9 & 4 \\
+                -7 & 5  & 3
+            \end{bmatrix}
+        \]
+    \end{sol}
+
+    \item[\textbf{Square Matrix:}] The number of rows of a square matrix is equal to its number of columns.
+
+    \textbf{Exercise:} Is the following matrix square?
+    \[
+        A = \begin{bmatrix}
+            2  & -7 \\
+            -9 & 5
+        \end{bmatrix}
+    \]
+
+    \begin{sol}
+        Yes, it is. Because, it has two rows and two columns.
+    \end{sol}
+
+    \item[\textbf{Rank:}] Number of linearly independent rows/columns is called row/column rank. A set of vectors $x_1, x_2, \ldots x_n$ is set to be linearly independent, if there exists no set of scalars $\alpha_1, \alpha_2 \ldots \alpha_n$, not all zero, such that $\sum \alpha_i x_i = 0$.\footnote{\cite[][see page 8]{MagnusNeudecker-2019-part1}}
+
+    \textbf{Exercise:} Find the rank of the following matrix using R:
+
+    \[
+        A = \begin{bmatrix}
+            2  & -7 \\
+            -9 & 5  \\
+            4  & 3
+        \end{bmatrix}
+    \]
+
+    \begin{sol}
+        \lstinputlisting{../R-files/matrix_rank.R}
+
+        The R-script tells that the rank of matrix $A$ is two, i.e. $r(A) = 2$. Note that the rank of a matrix can be at most $min(m, n)$, where $m$ is number of rows and $n$ is number of columns. Here, we have three rows and two columns. So, the rank can be at most two.
+    \end{sol}
+
+    \item[\textbf{Inverse:}] When you multiply a matrix with its inverse, you get an identity matrix:
+    \[
+        A A^{-1} = A^{-1} A = I_n
+    \]
+    Note that matrix $A$ must be square matrix. So, here $m = n$ for matrix $A$. Moreover, it might be that an inverse does not exist.
+
+    \textbf{Exercise:} Take the inverse of the following matrix and using R, check, if your answer is correct by multiplying the inverse with the original matrix:
+    \[
+        A = \begin{bmatrix}
+            2  & -7 \\
+            -9 & 5
+        \end{bmatrix}
+    \]
+
+    \begin{sol}
+        For two-by-two matrices, there is a simple formula for inverting:
+        \[
+            \begin{bmatrix}
+                -0.09433962 & -0.13207547 \\
+                -0.16981132 & -0.03773585
+            \end{bmatrix}
+        \]
+    \end{sol}
+
+    \item[\textbf{Determinant:}]
+
+    \item[\textbf{Trace:}]
+
+    \item[\textbf{Eigenvalues \& Eigenvectors:}]
+
+    \item[\textbf{Kronecker Product:}]
+\end{labeling}
