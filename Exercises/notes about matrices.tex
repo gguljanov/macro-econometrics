@@ -9,6 +9,8 @@
         \end{bmatrix}
     \]
 
+    For the following definitions, we use $m \times n$ matrices $A$ and $B$. When we talk about square matrices, we assume $m = n$.
+
     \item[\textbf{Addition:}] Adding two matrices is adding the respective elements:
     \[ A + B = (a_{ij}) + (b_{ij}) = (a_{ij} + b_{ij}). \]
     Note that the dimensions of the summands must be the same.
@@ -82,6 +84,7 @@
     \[
         (a'_{ij}) = (a_{ji})
     \]
+    It is denoted as $A'$.
 
     \textbf{Exercise:} Take the transpose of the following matrix
 
@@ -116,7 +119,7 @@
         Yes, it is. Because, it has two rows and two columns.
     \end{sol}
 
-    \item[\textbf{Rank:}] Number of linearly independent rows/columns is called row/column rank. A set of vectors $x_1, x_2, \ldots x_n$ is set to be linearly independent, if there exists no set of scalars $\alpha_1, \alpha_2 \ldots \alpha_n$, not all zero, such that $\sum \alpha_i x_i = 0$.\footnote{\cite[][see page 8]{MagnusNeudecker-2019-part1}}
+    \item[\textbf{Rank:}] Number of linearly independent rows/columns is called row/column rank. A set of vectors $x_1, x_2, \ldots x_n$ is set to be linearly independent, if there exists no set of scalars $\alpha_1, \alpha_2 \ldots \alpha_n$, not all zero, such that $\sum \alpha_i x_i = 0$.\footnote{\cite[][see page 8]{MagnusNeudecker-2019-part1}} The rank is denoted as $r(A)$.
 
     \textbf{Exercise:} Find the rank of the following matrix using R:
 
@@ -138,7 +141,7 @@
     \[
         A A^{-1} = A^{-1} A = I_n
     \]
-    Note that matrix $A$ must be square matrix. So, here $m = n$ for matrix $A$. Moreover, it might be that an inverse does not exist.
+    Note that matrix $A$ must be square matrix. So, here $m = n$ for matrix $A$. Moreover, it might be that an inverse does not exist. The inverse is denoted as $A^{-1}$.
 
     \textbf{Exercise:} Take the inverse of the following matrix and using R, check, if your answer is correct by multiplying the inverse with the original matrix:
     \[
@@ -158,11 +161,249 @@
         \]
     \end{sol}
 
-    \item[\textbf{Determinant:}]
+    \item[\textbf{Determinant:}] Determinant is a special number associated with a square matrix. In R, you can find the determinan of matrix $A$ with \verb|determinant(A, logarithm = FALSE)|. The determinant is denoted as $|A|$.
 
-    \item[\textbf{Trace:}]
+    \textbf{Exercise:} Find the determinant of the following matrix:
+    \[
+        A = \begin{bmatrix}
+            1  & 12 & 8  & 13 \\
+            15 & 6  & 10 & 3  \\
+            14 & 7  & 11 & 2  \\
+            4  & 9  & 5  & 16 \\
+        \end{bmatrix}
+    \]
 
-    \item[\textbf{Eigenvalues \& Eigenvectors:}]
+    \begin{sol}
+        \lstinputlisting{../R-files/matrix_determinant.R}
+    \end{sol}
 
-    \item[\textbf{Kronecker Product:}]
+    \item[\textbf{Trace:}] Sum of a diagonal elements of a square matrix. It is denoted as $tr(A)$.
+
+    \textbf{Exercise:} Find the trace of the following matrix.
+    \[
+        A = \begin{bmatrix}
+            1  & 12 & 8  & 13 \\
+            15 & 6  & 10 & 3  \\
+            14 & 7  & 11 & 2  \\
+            4  & 9  & 5  & 16 \\
+        \end{bmatrix}
+    \]
+
+    \begin{sol}
+        $tr(A) = 1 + 6 + 11 + 16 = 34$
+    \end{sol}
+
+    \item[\textbf{Eigenvalues:}] The eigenvalues of $A$ are defined as the roots of the characteristic equation:\footnote{This definition is from \cite[][page 12]{MagnusNeudecker-2019-part1}}
+    \[ |\lambda I_n - A| = 0 \]
+
+    \item[\textbf{Eigenvectors:}] Let $\lambda$ be an eigenvalue of $A$. Then, there exists a vector $x$ ($x \neq 0$) such that
+    \[ (\lambda I - A) x = 0. \]
+    The vector $x$ is called a (column) eigenvector of $A$ associated with the eigenvalue $\lambda$.\footnote{This definition is from \cite[][page 12]{MagnusNeudecker-2019-part1}}
+
+    \textbf{Exercise:} Using R, determine the eigenvalues and eigenvectors of the following matrix:
+    \[
+        A = \begin{bmatrix}
+            0.5 & 0   & 0   \\
+            0.1 & 0.1 & 0.3 \\
+            0   & 0.2 & 0.3
+        \end{bmatrix}
+    \]
+
+    \begin{sol}
+        \lstinputlisting{../R-files/eigen_values_vectors.R}
+    \end{sol}
+
+    \item[\textbf{Vectorization:}] Stacks the columns of a matrix one after another, vertically, resulting in a long column vector:
+    \begin{align*}
+        A
+         & = \begin{bmatrix}
+                 a_{11} & a_{12} & a_{13} \\
+                 a_{21} & a_{22} & a_{23} \\
+                 a_{31} & a_{32} & a_{33}
+             \end{bmatrix}
+        \\
+        vec(A)
+         & = \begin{pmatrix}
+                 a_{11} \\ a_{21} \\ a_{31} \\
+                 a_{21} \\ a_{22} \\ a_{23} \\
+                 a_{31} \\ a_{32} \\ a_{33}
+             \end{pmatrix}
+    \end{align*}
+
+    \textbf{Exercise:} Determine the following:
+    \begin{align*}
+        vec \begin{bmatrix}
+                1 & 3 & 2 \\
+                1 & 0 & 0 \\
+                1 & 2 & 2
+            \end{bmatrix}
+        =
+        ?
+    \end{align*}
+
+    \textbf{Exercise:} Determine the following:
+    \begin{align*}
+        vec \begin{pmatrix}
+                1 & 3 & 2 \\
+                1 & 0 & 0 \\
+                1 & 2 & 2
+            \end{pmatrix}
+        =
+        ?
+    \end{align*}
+
+    \begin{sol}
+        \begin{align*}
+            vec \begin{pmatrix}
+                    1 & 3 & 2 \\
+                    1 & 0 & 0 \\
+                    1 & 2 & 2
+                \end{pmatrix}
+            =
+            \begin{pmatrix}
+                1 \\ 1 \\ 1 \\ 3 \\ 0 \\ 2 \\ 2 \\ 0 \\ 2
+            \end{pmatrix}
+        \end{align*}
+    \end{sol}
+
+    \item[\textbf{Half-vectorization:}] Similar to $vec(\cdot)$ operator, but considers only those elements on or below the diagonal:\footnote{for more details, see \cite[][page 300-301]{Hamilton-1994}}
+    \begin{align*}
+        A
+         & = \begin{bmatrix}
+                 a_{11} & a_{12} & a_{13} \\
+                 a_{21} & a_{22} & a_{23} \\
+                 a_{31} & a_{32} & a_{33}
+             \end{bmatrix}
+        \\
+        vech(A)
+         & = \begin{pmatrix}
+                 a_{11} \\ a_{21} \\ a_{31} \\ a_{22} \\ a_{23} \\ a_{33}
+             \end{pmatrix}
+    \end{align*}
+
+    \textbf{Exercise:} Determine the following:
+    \begin{align*}
+        vech \begin{pmatrix}
+                 1 & 3 & 2 \\
+                 1 & 0 & 0 \\
+                 1 & 2 & 2
+             \end{pmatrix}
+        =
+        ?
+    \end{align*}
+
+    \begin{sol}
+        \begin{align*}
+            vec \begin{pmatrix}
+                    1 & 3 & 2 \\
+                    1 & 0 & 0 \\
+                    1 & 2 & 2
+                \end{pmatrix}
+            =
+            \begin{pmatrix}
+                1 \\ 1 \\ 1 \\ 0 \\ 2 \\ 2
+            \end{pmatrix}
+        \end{align*}
+    \end{sol}
+
+    \item[\textbf{Kronecker Product:}] Multiplies each element of the first matrix with the entire second matrix:
+    \[
+        A \otimes B = \begin{bmatrix}
+            a_{11} B & \cdots & a_{1n} B \\
+            \vdots   &        & \vdots   \\
+            a_{m1} B & \cdots & a_{nn} B \\
+        \end{bmatrix}
+    \]
+
+    \textbf{Exercise:}
+    \[
+        \underbrace{%
+            \begin{bmatrix}
+                1 & 3 & 2 \\
+                1 & 0 & 0 \\
+                1 & 2 & 2
+            \end{bmatrix}%
+        }_{3 \times 3}
+        \otimes
+        \underbrace{%
+            \begin{bmatrix}
+                0 & 5 \\
+                5 & 0 \\
+                1 & 1
+            \end{bmatrix}%
+        }_{3 \times 2}
+        = ?
+    \]
+
+    \begin{sol}
+        \begin{align*}
+            \underbrace{%
+                \begin{bmatrix}
+                    1 & 3 & 2 \\
+                    1 & 0 & 0 \\
+                    1 & 2 & 2
+                \end{bmatrix}%
+            }_{3 \times 3}
+            \otimes
+            \underbrace{%
+                \begin{bmatrix}
+                    0 & 5 \\
+                    5 & 0 \\
+                    1 & 1
+                \end{bmatrix}%
+            }_{3 \times 2}
+            =
+            \underbrace{%
+                \begin{bmatrix}
+                    1\cdot\begin{pmatrix}
+                              0 & 5 \\
+                              5 & 0 \\
+                              1 & 1
+                          \end{pmatrix}
+                     & 3\cdot\begin{pmatrix}
+                                 0 & 5 \\
+                                 5 & 0 \\
+                                 1 & 1
+                             \end{pmatrix}
+                     & 2\cdot\begin{pmatrix}
+                                 0 & 5 \\
+                                 5 & 0 \\
+                                 1 & 1
+                             \end{pmatrix}
+                    \\[0.8cm]
+                    1\cdot\begin{pmatrix}
+                              0 & 5 \\
+                              5 & 0 \\
+                              1 & 1
+                          \end{pmatrix}
+                     & 0\cdot\begin{pmatrix}
+                                 0 & 5 \\
+                                 5 & 0 \\
+                                 1 & 1
+                             \end{pmatrix}
+                     & 0\cdot\begin{pmatrix}
+                                 0 & 5 \\
+                                 5 & 0 \\
+                                 1 & 1
+                             \end{pmatrix}
+                    \\[0.8cm]
+                    1\cdot\begin{pmatrix}
+                              0 & 5 \\
+                              5 & 0 \\
+                              1 & 1
+                          \end{pmatrix}
+                     & 2\cdot\begin{pmatrix}
+                                 0 & 5 \\
+                                 5 & 0 \\
+                                 1 & 1
+                             \end{pmatrix}
+                     & 2\cdot\begin{pmatrix}
+                                 0 & 5 \\
+                                 5 & 0 \\
+                                 1 & 1
+                             \end{pmatrix}
+                \end{bmatrix}%
+            }_{9 \times 6}
+        \end{align*}
+    \end{sol}
 \end{labeling}
