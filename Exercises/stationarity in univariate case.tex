@@ -46,45 +46,51 @@
               Thus, the covariance between $y_t$ and $y_{t-k}$ is only a function of the time between two points, and not of time itself.
           \end{sol}
 
-    \item Using R, simulate $2500$ observations from the \arp[1]{} process, $y_t = \phi y_{t-1} + \nu_t$ with $\nu_t \sim N(0, 1)$, for each $\phi = 0.99$, $\phi = 1.00$, and $\phi = 1.01$. Plot the simulated series and the corresponding auto-correlation function (ACF). Try and guess which cases are stationary and which cases are non-stationary. 
+    \item Using R, simulate $2500$ observations from the \arp[1]{} process, $y_t = \phi y_{t-1} + \nu_t$ with $\nu_t \sim N(0, 1)$, for each $\phi = 0.6, 0.99, 1.00, 1.01$. Plot the simulated series and the corresponding auto-correlation function (ACF). Try and guess which cases are stationary and which cases are non-stationary.
 
-    \begin{sol}
-        \lstinputlisting{../R-files/simulate_ar1.R}
-    \end{sol}
+          \begin{sol}
+              \lstinputlisting{../R-files/simulate_ar1.R}
+
+              As we can guess from the plots, the cases with $\phi = 0.66, 0.99$ are stable (stationary) while the other processes are non-stationary. See the next exercise to understand why.
+
+              There is a subtle difference between stability and stationarity. A process is stable if it converges to stationarity as time passes.
+
+              One more thing to note is that a small change of $0.1$ between values can result in highly different behavior over long time.
+          \end{sol}
 
     \item Consider an \armapq{} process, $\Phi(L) X_t = \Theta(L) \nu_t$:
-        \begin{enumerate}[label=$\bullet$]
-        \item \armapq{} processes are \emph{stable}, if all roots of 
-        \[ \Phi(z) = 0 \]
-        are larger than 1 in absolute values.
+          \begin{enumerate}[label=$\bullet$]
+              \item \armapq{} processes are \emph{stable}, if all roots of
+                    \[ \Phi(z) = 0 \]
+                    are larger than 1 in absolute values.
 
-        \item \armapq{} processes are \emph{invertible}, if all roots of 
-        \[ \Theta(z) = 0 \]
-        are larger than 1 in absolute values.\footnote{For more details, see \cite[][Chapter 3, "Stationary ARMA Processes"]{Hamilton-1994}}
-        \end{enumerate}
+              \item \armapq{} processes are \emph{invertible}, if all roots of
+                    \[ \Theta(z) = 0 \]
+                    are larger than 1 in absolute values.\footnote{For more details, see \cite[][Chapter 3, "Stationary ARMA Processes"]{Hamilton-1994}}
+          \end{enumerate}
 
-        Check whether the following \armapq[2, 2]{} is stable and invertible.
-        \[
-            X_t
-            = 0.2 X_{t-1} + 0.48 X_{t-2}
-            + \nu_t - 0.2 \nu_{t-1} - 0.08 \nu_{t-2}
-        \]
+          Check whether the following \armapq[2, 2]{} is stable and invertible.
+          \[
+              X_t
+              = 0.2 X_{t-1} + 0.48 X_{t-2}
+              + \nu_t - 0.2 \nu_{t-1} - 0.08 \nu_{t-2}
+          \]
 
-        \begin{sol}
-            \begin{align*}
-                X_t
-                & = 0.2 X_{t-1} + 0.48 X_{t-2}
-                + \nu_t - 0.2 \nu_{t-1} - 0.08 \nu_{t-2}
-                \\
-                X_t - 0.2 X_{t-1} - 0.48 X_{t-2} 
-                & = \nu_t - 0.2 \nu_{t-1} - 0.08 \nu_{t-2}
-                \\
-                (1 - 0.2 L - 0.48 L^2) X_t 
-                & = (1 - 0.2 L - 0.08 L^2) \nu_t
-            \end{align*}
+          \begin{sol}
+              \begin{align*}
+                  X_t
+                   & = 0.2 X_{t-1} + 0.48 X_{t-2}
+                  + \nu_t - 0.2 \nu_{t-1} - 0.08 \nu_{t-2}
+                  \\
+                  X_t - 0.2 X_{t-1} - 0.48 X_{t-2}
+                   & = \nu_t - 0.2 \nu_{t-1} - 0.08 \nu_{t-2}
+                  \\
+                  (1 - 0.2 L - 0.48 L^2) X_t
+                   & = (1 - 0.2 L - 0.08 L^2) \nu_t
+              \end{align*}
 
-            Using the following R script, we find that both $\Phi(z) = 0$ and $\Theta(z) = 0$ have roots outside the unit circle.
-            \lstinputlisting{../R-files/polynomial_roots.R}
-            Thus, the process is both stable and invertible.
-        \end{sol}
+              Using the following R script, we find that both $\Phi(z) = 0$ and $\Theta(z) = 0$ have roots outside the unit circle.
+              \lstinputlisting{../R-files/polynomial_roots.R}
+              Thus, the process is both stable and invertible.
+          \end{sol}
 \end{enumerate}

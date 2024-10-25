@@ -30,11 +30,11 @@
 % Change the title format
 \usepackage[explicit]{titlesec}
 \titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{%
-    Ch. \thesection ~ -- ~ #1%
+    Ex. \thesection ~ -- ~ #1%
 }
-\titleformat{\subsection}{\normalfont\large\bfseries}{}{0em}{%
-    Ex. \thesubsection ~ -- ~ #1%
-}
+% \titleformat{\subsection}{\normalfont\large\bfseries}{}{0em}{%
+%     Ex. \thesubsection ~ -- ~ #1%
+% }
 
 % Enumerating items
 \usepackage{enumitem}
@@ -197,7 +197,7 @@
 
 
 % === Solutions open/closed ===
-% \usepackage{answers}
+%\usepackage{answers}
 \usepackage[nosolutionfiles]{answers}
 
 \renewcommand{\solutionstyle}[1]{\textbf{Sol. #1}:\hspace*{\textwidth}}
@@ -233,66 +233,74 @@ The references for this tutorial are
 
 % % === Exercises ===
 % Notes about matrices
-\subsection{Notes about matrices\texorpdfstring{%
-        \protect\footnote{Based mainly on \cite{MagnusNeudecker-2019-part1} and \cite{MagnusNeudecker-2019-part2}; some parts are from \cite[][]{Hamilton-1994} and \cite[][]{Mutschler-2018-github_repo}}%
-    }{}}
+\section{Notes about matrices\texorpdfstring{%
+      \protect\footnote{Based mainly on \cite{MagnusNeudecker-2019-part1} and \cite{MagnusNeudecker-2019-part2}; some parts are from \cite[][]{Hamilton-1994} and \cite[][]{Mutschler-2018-github_repo}}%
+  }{}}
 \input{../Exercises/notes about matrices.tex}
 
 % EUROSTAT with r
-\subsection{EUROSTAT with R}
+\section{EUROSTAT with R}
 \input{../Exercises/eurostat with r.tex}
 
 % Intro
-\subsection{Introduction to Macroeconometrics\texorpdfstring{%
-        \protect\footnote{Taken from \cite[][see the section no 1, titled ``Macroeconometrics''.]{Mutschler-2018-github_repo}}%
-    }{}}
+\section{Introduction to Macroeconometrics\texorpdfstring{%
+      \protect\footnote{Taken from \cite[][see the section no 1, titled ``Macroeconometrics''.]{Mutschler-2018-github_repo}}%
+  }{}}
 \input{../Exercises/introduction to macroeconometrics.tex}
 
 % From univariate to multivariate models
-\subsection{From univariate to multivariate models}
+\section{From univariate to multivariate models}
 \input{../Exercises/from univariate to multivariate models.tex}
 
-% Dimensions in VAR models
-\subsection{Dimensions in \texorpdfstring{\varp{}}{VAR} models\texorpdfstring{%
-        \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
-    }{}
-}
-\input{../Exercises/dimensions in var models.tex}
-
-% Dimensions in SVAR models
-\subsection{Dimensions in \texorpdfstring{\svarp{}}{SVAR} models\texorpdfstring{%
-        \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
-    }{}}
-\input{../Exercises/dimensions in svar models.tex}
-
-% Identification in SVAR models
-\subsection{Identification in \texorpdfstring{\svar{}}{SVAR} models\texorpdfstring{%
-        \protect\footnote{Based on \cite[][see pages 332-334]{Hamilton-1994} and \cite[][see chapter 14]{MartinHurnHarris-2012}.}%
-    }{}}
-\input{../Exercises/identification in svar models.tex}
-
-% Stationarity in univariate case
-\subsection{Stationarity in univariate case\texorpdfstring{%
-        \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
-    }{}}
-\input{../Exercises/stationarity in univariate case.tex}
-
-\subsection{Stationarity in multivariate case}
-\input{../Exercises/stationarity in multivariate case.tex}
-
-% Theoretical and simulated moments
-\subsection{Theoretical and simulated moments\texorpdfstring{%
-        \protect\footnote{Taken from \cite[][see Sectiona 18, "Theoretical and simulated moments]{Mutschler-2018-github_repo}}%
-    }{}}
-\input{../Exercises/theoretical and simulated moments.tex}
-
-% Transforming var to vma
-\subsection{Transforming a VAR to a VMA}
-\input{../Exercises/transforming var to vma.tex}
-
-% Estimation of var models
-\subsection{Estimation of VAR models}
-% \input{../Exercises/estimation of var models.tex}
+%% Dimensions in VAR models
+%\section{Dimensions in \texorpdfstring{\varp{}}{VAR} models\texorpdfstring{%
+%      \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
+%  }{}
+% }
+%\input{../Exercises/dimensions in var models.tex}
+%
+%% Dimensions in SVAR models
+%\section{Dimensions in \texorpdfstring{\svarp{}}{SVAR} models\texorpdfstring{%
+%      \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
+%  }{}}
+%\input{../Exercises/dimensions in svar models.tex}
+%
+%% Identification in SVAR models
+%\section{Identification in \texorpdfstring{\svar{}}{SVAR} models\texorpdfstring{%
+%      \protect\footnote{Based on \cite[][see pages 332-334]{Hamilton-1994} and \cite[][see chapter 14]{MartinHurnHarris-2012}.}%
+%  }{}}
+%\input{../Exercises/identification in svar models.tex}
+%
+%% Stationarity in univariate case
+%\section{Stationarity in univariate case\texorpdfstring{%
+%      \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
+%  }{}}
+%\input{../Exercises/stationarity in univariate case.tex}
+%
+%\section{Stationarity in multivariate case}
+%\input{../Exercises/stationarity in multivariate case.tex}
+%
+%% Theoretical and simulated moments
+%\section{Theoretical and simulated moments\texorpdfstring{%
+%      \protect\footnote{Taken from \cite[][see Sectiona 18, "Theoretical and simulated moments]{Mutschler-2018-github_repo}}%
+%  }{}}
+%\input{../Exercises/theoretical and simulated moments.tex}
+%
+%% Transforming var to vma
+%\section{Transforming a VAR to a VMA}
+%\input{../Exercises/transforming var to vma.tex}
+%
+%% Monte Carlo estimation of var models
+%\section{Monte Carlo estimation of VAR models\texorpdfstring{%
+%      \protect\footnote{Based on \cite{Mutschler-2018-github_repo} and \cite{Hamilton-1994}}%
+%  }{}}
+%\input{../Exercises/monte carlo estimation of var models.tex}
+%
+%% Estimation of Okun's Law
+%\section{Estimation of Okun's law\texorpdfstring{%
+%      \protect\footnote{Based on \cite{KissNguyenOesterholm-2023}}%
+%  }{}}
+%\input{../Exercises/okuns law.tex}
 
 % Information criteria and Hypothesis tests
 

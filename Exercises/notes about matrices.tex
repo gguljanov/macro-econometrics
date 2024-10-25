@@ -161,7 +161,7 @@
         \]
     \end{sol}
 
-    \item[\textbf{Determinant:}] Determinant is a special number associated with a square matrix. In R, you can find the determinan of matrix $A$ with \verb|determinant(A, logarithm = FALSE)|. The determinant is denoted as $|A|$.
+    \item[\textbf{Determinant:}] Determinant is a special number associated with a square matrix. In R, you can find the determinant of matrix $A$ with \verb|determinant(A, logarithm = FALSE)|. The determinant is denoted as $|A|$.
 
     \textbf{Exercise:} Find the determinant of the following matrix:
     \[
@@ -216,18 +216,18 @@
     \item[\textbf{Vectorization:}] Stacks the columns of a matrix one after another, vertically, resulting in a long column vector:
     \begin{align*}
         A
-         & = \begin{bmatrix}
-                 a_{11} & a_{12} & a_{13} \\
-                 a_{21} & a_{22} & a_{23} \\
-                 a_{31} & a_{32} & a_{33}
-             \end{bmatrix}
-        \\
+        = \begin{bmatrix}
+              a_{11} & a_{12} & a_{13} \\
+              a_{21} & a_{22} & a_{23} \\
+              a_{31} & a_{32} & a_{33}
+          \end{bmatrix},
+        \quad \quad
         vec(A)
-         & = \begin{pmatrix}
-                 a_{11} \\ a_{21} \\ a_{31} \\
-                 a_{21} \\ a_{22} \\ a_{23} \\
-                 a_{31} \\ a_{32} \\ a_{33}
-             \end{pmatrix}
+        = \begin{pmatrix}
+              a_{11} \\ a_{21} \\ a_{31} \\
+              a_{12} \\ a_{22} \\ a_{32} \\
+              a_{13} \\ a_{23} \\ a_{33}
+          \end{pmatrix}.
     \end{align*}
 
     \textbf{Exercise:} Determine the following:
@@ -237,17 +237,6 @@
                 1 & 0 & 0 \\
                 1 & 2 & 2
             \end{bmatrix}
-        =
-        ?
-    \end{align*}
-
-    \textbf{Exercise:} Determine the following:
-    \begin{align*}
-        vec \begin{pmatrix}
-                1 & 3 & 2 \\
-                1 & 0 & 0 \\
-                1 & 2 & 2
-            \end{pmatrix}
         =
         ?
     \end{align*}
@@ -269,16 +258,16 @@
     \item[\textbf{Half-vectorization:}] Similar to $vec(\cdot)$ operator, but considers only those elements on or below the diagonal:\footnote{for more details, see \cite[][page 300-301]{Hamilton-1994}}
     \begin{align*}
         A
-         & = \begin{bmatrix}
-                 a_{11} & a_{12} & a_{13} \\
-                 a_{21} & a_{22} & a_{23} \\
-                 a_{31} & a_{32} & a_{33}
-             \end{bmatrix}
-        \\
+        = \begin{bmatrix}
+              a_{11} & a_{12} & a_{13} \\
+              a_{21} & a_{22} & a_{23} \\
+              a_{31} & a_{32} & a_{33}
+          \end{bmatrix},
+        \quad \quad
         vech(A)
-         & = \begin{pmatrix}
-                 a_{11} \\ a_{21} \\ a_{31} \\ a_{22} \\ a_{23} \\ a_{33}
-             \end{pmatrix}
+        = \begin{pmatrix}
+              a_{11} \\ a_{21} \\ a_{31} \\ a_{22} \\ a_{32} \\ a_{33}
+          \end{pmatrix}.
     \end{align*}
 
     \textbf{Exercise:} Determine the following:
@@ -294,11 +283,11 @@
 
     \begin{sol}
         \begin{align*}
-            vec \begin{pmatrix}
-                    1 & 3 & 2 \\
-                    1 & 0 & 0 \\
-                    1 & 2 & 2
-                \end{pmatrix}
+            vech \begin{pmatrix}
+                     1 & 3 & 2 \\
+                     1 & 0 & 0 \\
+                     1 & 2 & 2
+                 \end{pmatrix}
             =
             \begin{pmatrix}
                 1 \\ 1 \\ 1 \\ 0 \\ 2 \\ 2

@@ -1,0 +1,43 @@
+Okun's Law describes the macroeconomic relationship between GDP and UNEMPLOYMENT. In this exercise, you will estime this law using \verb|vars| package. Use the following series for the estimation:
+\begin{enumerate}[label=-]
+    \item \verb|CLVMNACSCAB1GQDE.csv|: Real Gross Domestic Product for Germany; from FRED; seasonally adjusted; Quarterly; Millions of Chained 2010 Euros
+
+    \item \verb|LRHUADTTDEQ156S.csv|: Unemployment for German; from FRED; seasonally adjusted; Quarterly; percent
+\end{enumerate}
+
+Follow the steps below for a successful estimation:
+\begin{enumerate}[label=\roman*.]
+    \item Read both data series
+
+    \item Transform the \emph{GDP} into \emph{growth rate} using the formula below:
+          \[
+              g_t = 100 (Y_t / Y_{t-1} - 1)
+          \]
+          where $g_t$ is growth rate, $Y_t$ is seasonally adjusted real GDP
+
+    \item Transform the \emph{unemployment rate} into the \emph{change in unemployment rate} by taking the first difference.
+
+    \item Plot the both series with and without the transformation, in order to have the first impression. Do the transformed data series look stationary? What would you do to check the stationarity formally?
+
+    \item Give the series to \verb|VAR()| command from \verb|vars| package.
+
+    \item Interpret your results. Do the results seem appropriate?
+
+    \item Check if the \emph{change in unemployment rate} Granger-cause the \emph{GDP growth}?
+\end{enumerate}
+
+\begin{sol}
+    \lstinputlisting{../R-files/okuns law.R}
+
+    \verb|vars| package estimates the \varp{} models, equation by equation. Thus, the code above results in the following two tables:
+
+    The regression equation for unemployment is:
+    \input{../Tex-files-auto/reg_unemployment.tex}
+
+    The regression equation for gdp growth is:
+    \input{../Tex-files-auto/reg_growth.tex}
+
+    The data series not transformed look non-stationary, while tranformed ones look stationary. You can formally check for stationarity formally, using tests such as Augmented Dickey-Fuller (ADF) or Kwiatkowski-Phillips-Schmidt-Shin (KPSS). Usually, these two tests are conducted together.
+
+    Decreasing the unemployment increases the growth. So, the sign makes sense. However, unemployment is not statistically significant.
+\end{sol}

@@ -1,6 +1,6 @@
 sim_len <- 2500
 
-phi_vec <- c(0.99, 1, 1.01)
+phi_vec <- c(0.66, 0.99, 1, 1.01)
 
 nu_t <- rnorm(sim_len)
 
