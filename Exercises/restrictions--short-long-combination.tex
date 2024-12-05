@@ -1,0 +1,104 @@
+In this exercise, we will analyze output and prices in Germany using structural \var{} models. We will first use short run restriction and then long run restriction. Finally, we will combine them.
+
+The model is:
+\[ B_0 y_t = B_1 y_{t-1} + u_t \]
+with
+\[ y_t = \begin{pmatrix} \Delta ln o_t \\ \Delta ln p_t \end{pmatrix}. \]
+
+Use the following data:
+\begin{enumerate}[label=-]
+    \item \verb|CLVMNACSCAB1GQDE.csv|: Real Gross Domestic Product for Germany; from FRED; seasonally adjusted; Quarterly; Millions of Chained 2010 Euros
+
+    \item \verb|CP0000DEM086NEST|: Harmonized Index of Consumer Prices: All Items for Germany; from FRED; Index $2015=100$; Not Seasonally Adjusted; Quarterly - End of Period; Adjusted
+\end{enumerate}
+
+
+
+\begin{enumerate}
+    \item Read, plot, and transform the data.
+
+          \begin{sol}
+              See the R-codes
+          \end{sol}
+
+    \item Short-run restrictions can be imposed either on $B_0$ or $S = B_0^{-1} D^{1/2}$. What do restrictions on either matrix mean?
+
+          \begin{sol}
+              $B_0$ captures the contemporaneous influence of the elements of $y_t$ on each other.
+
+              $S$ captures the contemporaneous relationships between the $y_t$ variables and the structural shocks.\footnote{\cite[see page 518][]{MartinHurnHarris-2012}}.
+
+              Note that, in the recursive case restrictions on $S$ and $B_0$ coincide.
+          \end{sol}
+
+    \item We want to impose that in the short run, real shocks do not affect the nominal variables. Determine the matrix $S$ and estimate the model.
+
+          \begin{sol}
+              \[
+                  S = \begin{bmatrix}
+                      s_{1, 1} & s_{1, 2} \\
+                      0        & s_{2, 2}
+                  \end{bmatrix}
+              \]
+
+              The rest is implemented in the R-codes.
+          \end{sol}
+
+    \item We want to impose that in the long run, nominal shocks do not affect the real variables. Determine the corresponding matrices of the \svarp{} model and estimate.
+
+          \begin{sol}
+              \[
+                  F = \Phi(1)^{-1} S =  \begin{pmatrix}
+                      f_{1, 1} & 0        \\
+                      f_{2, 1} & f_{2, 2}
+                  \end{pmatrix}
+              \]
+          \end{sol}
+
+    \item Now we want to combine the short run and long run restrictions we had above. Determine the corresponding matrices and estimate.
+
+          \begin{sol}
+              \begin{align*}
+                  S
+                   & = \begin{bmatrix}
+                           s_{1, 1} & s_{1, 2} \\
+                           0        & s_{2, 2}
+                       \end{bmatrix}
+                  \\[0.2cm]
+                  F
+                   & =  \begin{pmatrix}
+                            f_{1, 1} & 0        \\
+                            f_{2, 1} & f_{2, 2}
+                        \end{pmatrix}
+                  \\[0.2cm]
+                  \Phi(1)^{-1}
+                   & = \begin{pmatrix}
+                           \phi^{1, 1} & \phi^{1, 2} \\
+                           \phi^{2, 1} & \phi^{2, 2}
+                       \end{pmatrix}
+                  \\[0.2cm]
+                  F
+                   & = \Phi(1) S
+                  \\[0.2cm]
+                   & \Downarrow
+                  \\[0.2cm]
+                  0
+                   & = f_{1, 2} = \phi^{1, 1} s_{1, 2} + \phi^{1, 2} s_{2, 2}
+                  \\[0.2cm]
+                  s_{2, 2}
+                   & = -\frac{\phi^{1, 1}}{\phi^{1, 2}} s_{1, 2}
+                  \\[0.2cm]
+                   & \Downarrow
+                  \\[0.2cm]
+                  S
+                   & = \begin{pmatrix}
+                           s_{1, 1} & s_{1, 2}
+                           \\
+                           0        & -\frac{\phi^{1, 1}}{\phi^{1, 2}} s_{1, 2}
+                       \end{pmatrix}
+              \end{align*}
+
+              The estimation is in the following R-file:
+              \lstinputlisting{../R-files/short_long_iden.R}
+          \end{sol}
+\end{enumerate}

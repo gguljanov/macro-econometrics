@@ -7,9 +7,9 @@ nu_t <- rnorm(sim_len)
 y_t <- rep(NA, sim_len)
 y_t[1] <- 0
 
-colors <- c("green", "red", "black")
+colors <- c("green", "red", "black", "purple")
 
-par(mfrow = c(3, 2))
+par(mfrow = c(4, 2))
 
 for (ii in seq_len(length(phi_vec))) {
     for (tt in 2:sim_len) {

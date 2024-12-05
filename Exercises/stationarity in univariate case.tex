@@ -7,7 +7,7 @@
               \textbf{Condition 1}, $\E[y_t] = \mu < \infty$:
               \begin{align*}
                   \E[y_t] = \E[\nu_t] + \psi \E[\nu_{t-1}]
-                  = 0 + \phi \times 0
+                  = 0 + \psi \times 0
                   = 0
               \end{align*}
               Thus, the mean is constant and finite.
@@ -26,14 +26,15 @@
                    & = \Cov(\nu_t + \psi \nu_{t-1}, \nu_{t-k} + \psi \nu_{t-k-1})
                   \\
                    & = \Cov(\nu_t, \nu_{t-k})
-                  + \Cov(\nu_t, \nu_{t-k-1})
-                  + \Cov(\nu_{t-1}, \nu_{t-k})
-                  + \Cov(\nu_{t-1}, \nu_{t-k-1})
+                  + \psi\Cov(\nu_t, \nu_{t-k-1})
+                  + \psi\Cov(\nu_{t-1}, \nu_{t-k})
+                  + \psi^2\Cov(\nu_{t-1}, \nu_{t-k-1})
                   \\
+                  & = 0 + \psi \cdot 0 + \psi\Cov(\nu_{t-1}, \nu_{t-k}) + \psi^2\cdot 0 \\
                    & \Downarrow
                   \\
                   \text{For $k=1$}: \quad \Cov(y_t, y_{t-1})
-                   & = 0 + 0 + \Cov(\nu_{t-1}, \nu_{t-1}) + 0 = 1
+                   & = 0 + 0 + \psi \Cov(\nu_{t-1}, \nu_{t-1}) + 0 = \psi 
                   \\
                   \text{For $k=2$}: \quad \Cov(y_t, y_{t-2})
                    & = 0 + 0 + 0 + 0 = 0

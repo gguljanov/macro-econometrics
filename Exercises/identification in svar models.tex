@@ -19,27 +19,27 @@ where
 
 \begin{enumerate}
     \item What does the imposition of $b_{0, 1, 2} = 0$ mean?
-
-          \begin{sol}
-              In the short-run, changes in the log prices does not affect the changes in the log output.
-          \end{sol}
+%
+%          \begin{sol}
+%              In the short-run, changes in the log prices does not affect the changes in the log output.
+%          \end{sol}
 
     \item Is the \emph{order condition} satisfied?
 
-          \begin{sol}
-              \begin{definition}
-                  \emph{Order condition:} $B_0$ and $D$ have no more unknown parameters than V.
-              \end{definition}
-
-              \begin{enumerate}[label=$\bullet$]
-                  \item $B_0$ has one unknown parameters
-
-                  \item $D$ has two unknown parameters
-
-                  \item $V$ has three distinct unknown parameters, as it is symmetric matrix
-              \end{enumerate}
-              Therefore, the \emph{order condition} is satisfied.
-          \end{sol}
+%          \begin{sol}
+%              \begin{definition}
+%                  \emph{Order condition:} $B_0$ and $D$ have no more unknown parameters than V.
+%              \end{definition}
+%
+%              \begin{enumerate}[label=$\bullet$]
+%                  \item $B_0$ has one unknown parameters
+%
+%                  \item $D$ has two unknown parameters
+%
+%                  \item $V$ has three distinct unknown parameters, as it is symmetric matrix
+%              \end{enumerate}
+%              Therefore, the \emph{order condition} is satisfied.
+%          \end{sol}
 
     \item Determine the following
           \begin{enumerate}[label=\roman*.]
@@ -51,84 +51,84 @@ where
           \end{enumerate}
 
 
-          \begin{sol}
-              \begin{flalign*}
-                  \theta_B & = b_{2, 1, 1}
-                  \\[0.8cm] % ======
-                  \theta_D & = \begin{pmatrix}
-                                   \sigma_o^2 \\ \sigma_p^2
-                               \end{pmatrix}
-                  \\[0.8cm] % ======
-                  B_0      & = \begin{bmatrix}
-                                   1           & 0 \\
-                                   b_{0, 2, 1} & 1
-                               \end{bmatrix}
-                  \\[0.8cm] % ======
-                  B_0^{-1} & = \begin{bmatrix}
-                                   1            & 0 \\
-                                   -b_{0, 2, 1} & 1
-                               \end{bmatrix}
-                  \\[0.8cm] % ======
-                  V        & = B_0^{-1} D (B_0^{-1})'
-                  \\[0.8cm] % ==========
-                           & = \begin{bmatrix}
-                                   1            & 0 \\
-                                   -b_{0, 2, 1} & 1
-                               \end{bmatrix}
-                  \begin{bmatrix}
-                      \sigma_o^2 & 0          \\
-                      0          & \sigma_p^2
-                  \end{bmatrix}
-                  \begin{bmatrix}
-                      1 & -b_{0, 2, 1} \\
-                      0 & 1
-                  \end{bmatrix}
-                  \\[0.8cm] % ==========
-                           & = \begin{bmatrix}
-                                   \sigma_o^2
-                                    & 0          \\
-                                   -b_{0, 2, 1} \sigma_o^2
-                                    & \sigma_p^2
-                               \end{bmatrix}
-                  \begin{bmatrix}
-                      1 & -b_{0, 2, 1} \\
-                      0 & 1
-                  \end{bmatrix}
-                  \\[0.8cm]
-                           & = \begin{bmatrix}
-                                   \sigma_o^2
-                                    & - b_{0, 2, 1} \sigma_o^2               \\
-                                   -b_{0, 2, 1} \sigma_o^2
-                                    & -b_{0, 2, 1}^2 \sigma_o^2 + \sigma_p^2
-                               \end{bmatrix}
-                  \\[0.8cm] % ==========
-                  vech(V)  & = \begin{pmatrix}
-                                   \sigma_o^2              \\
-                                   -b_{0, 2, 1} \sigma_o^2 \\
-                                   -b_{0, 2, 1}^2 \sigma_o^2 + \sigma_p^2
-                               \end{pmatrix}
-                  \\[0.8cm] % ==========
-                  J        & = \begin{bmatrix}
-                                   \frac{\partial vech(V)}{\partial \theta_B'}
-                                    & \frac{\partial vech(V)}{\partial \theta_D'}
-                               \end{bmatrix}
-                  \\[0.8cm] % ========
-                           & = \begin{bmatrix}
-                                   0
-                                    & 1
-                                    & 0
-                                   \\
-                                   -\sigma_o^2
-                                    & -b_{0, 2, 1}
-                                    & 0
-                                   \\
-                                   -2 b_{0, 2, 1} \sigma_o^2
-                                    & -b_{0, 2, 1}^2
-                                    & 1
-                                   \\
-                               \end{bmatrix}
-              \end{flalign*}
-          \end{sol}
+%          \begin{sol}
+%              \begin{flalign*}
+%                  \theta_B & = b_{2, 1, 1}
+%                  \\[0.8cm] % ======
+%                  \theta_D & = \begin{pmatrix}
+%                                   \sigma_o^2 \\ \sigma_p^2
+%                               \end{pmatrix}
+%                  \\[0.8cm] % ======
+%                  B_0      & = \begin{bmatrix}
+%                                   1           & 0 \\
+%                                   b_{0, 2, 1} & 1
+%                               \end{bmatrix}
+%                  \\[0.8cm] % ======
+%                  B_0^{-1} & = \begin{bmatrix}
+%                                   1            & 0 \\
+%                                   -b_{0, 2, 1} & 1
+%                               \end{bmatrix}
+%                  \\[0.8cm] % ======
+%                  V        & = B_0^{-1} D (B_0^{-1})'
+%                  \\[0.8cm] % ==========
+%                           & = \begin{bmatrix}
+%                                   1            & 0 \\
+%                                   -b_{0, 2, 1} & 1
+%                               \end{bmatrix}
+%                  \begin{bmatrix}
+%                      \sigma_o^2 & 0          \\
+%                      0          & \sigma_p^2
+%                  \end{bmatrix}
+%                  \begin{bmatrix}
+%                      1 & -b_{0, 2, 1} \\
+%                      0 & 1
+%                  \end{bmatrix}
+%                  \\[0.8cm] % ==========
+%                           & = \begin{bmatrix}
+%                                   \sigma_o^2
+%                                    & 0          \\
+%                                   -b_{0, 2, 1} \sigma_o^2
+%                                    & \sigma_p^2
+%                               \end{bmatrix}
+%                  \begin{bmatrix}
+%                      1 & -b_{0, 2, 1} \\
+%                      0 & 1
+%                  \end{bmatrix}
+%                  \\[0.8cm]
+%                           & = \begin{bmatrix}
+%                                   \sigma_o^2
+%                                    & - b_{0, 2, 1} \sigma_o^2               \\
+%                                   -b_{0, 2, 1} \sigma_o^2
+%                                    & -b_{0, 2, 1}^2 \sigma_o^2 + \sigma_p^2
+%                               \end{bmatrix}
+%                  \\[0.8cm] % ==========
+%                  vech(V)  & = \begin{pmatrix}
+%                                   \sigma_o^2              \\
+%                                   -b_{0, 2, 1} \sigma_o^2 \\
+%                                   -b_{0, 2, 1}^2 \sigma_o^2 + \sigma_p^2
+%                               \end{pmatrix}
+%                  \\[0.8cm] % ==========
+%                  J        & = \begin{bmatrix}
+%                                   \frac{\partial vech(V)}{\partial \theta_B'}
+%                                    & \frac{\partial vech(V)}{\partial \theta_D'}
+%                               \end{bmatrix}
+%                  \\[0.8cm] % ========
+%                           & = \begin{bmatrix}
+%                                   0
+%                                    & 1
+%                                    & 0
+%                                   \\
+%                                   -\sigma_o^2
+%                                    & -b_{0, 2, 1}
+%                                    & 0
+%                                   \\
+%                                   -2 b_{0, 2, 1} \sigma_o^2
+%                                    & -b_{0, 2, 1}^2
+%                                    & 1
+%                                   \\
+%                               \end{bmatrix}
+%              \end{flalign*}
+%          \end{sol}
 
     \item Using \texttt{R}, check whether the \emph{rank condition} is satisfied at the following parameter values?
 
@@ -137,11 +137,11 @@ where
 
               \item when $b_{0, 2, 1} = 2.1$, $\sigma_o^2 = 0$, and $\sigma_p^2 = 3.1$
           \end{enumerate}
-
-          \begin{sol}
-              \begin{definition}
-                  The rank condition requires that the columns of $J$ are linearly independent.
-              \end{definition}
-              \lstinputlisting{../R-files/rank_of_J_matrix.R}
-          \end{sol}
+%
+%          \begin{sol}
+%              \begin{definition}
+%                  The rank condition requires that the columns of $J$ are linearly independent.
+%              \end{definition}
+%              \lstinputlisting{../R-files/rank_of_J_matrix.R}
+%          \end{sol}
 \end{enumerate}

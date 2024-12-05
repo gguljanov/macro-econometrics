@@ -2,42 +2,97 @@ Okun's Law describes the macroeconomic relationship between GDP and UNEMPLOYMENT
 \begin{enumerate}[label=-]
     \item \verb|CLVMNACSCAB1GQDE.csv|: Real Gross Domestic Product for Germany; from FRED; seasonally adjusted; Quarterly; Millions of Chained 2010 Euros
 
-    \item \verb|LRHUADTTDEQ156S.csv|: Unemployment for German; from FRED; seasonally adjusted; Quarterly; percent
+    \item \verb|LRHUADTTDEQ156S.csv|: Unemployment rate for Germany; from FRED; seasonally adjusted; Quarterly; percent
 \end{enumerate}
 
-Follow the steps below for a successful estimation:
-\begin{enumerate}[label=\roman*.]
-    \item Read both data series
+\begin{enumerate}
+    \item Read both data series from the \texttt{.csv} files.
+
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+          \end{sol}
 
     \item Transform the \emph{GDP} into \emph{growth rate} using the formula below:
-          \[
-              g_t = 100 (Y_t / Y_{t-1} - 1)
-          \]
+          \begin{align}
+              g_t = 100 (Y_t / Y_{t-1} - 1) \label{eq-gdp-growth_rate}
+          \end{align}
           where $g_t$ is growth rate, $Y_t$ is seasonally adjusted real GDP
+
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+          \end{sol}
 
     \item Transform the \emph{unemployment rate} into the \emph{change in unemployment rate} by taking the first difference.
 
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+          \end{sol}
+
     \item Plot the both series with and without the transformation, in order to have the first impression. Do the transformed data series look stationary? What would you do to check the stationarity formally?
 
-    \item Give the series to \verb|VAR()| command from \verb|vars| package.
+          \begin{sol}
+              First, see \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+
+              The data series that are not transformed look non-stationary, while tranformed ones look stationary. You can formally check for stationarity formally, using tests such as Augmented Dickey-Fuller (ADF) or Kwiatkowski-Phillips-Schmidt-Shin (KPSS). Usually, these two tests are conducted together.
+          \end{sol}
+
+    \item Select the optimal number of lags using information criteria. (Use \verb|VARselect()| from \verb|vars| package.)
+
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+
+              The R-codes provide the following output:
+              \input{../Tex-files-auto/okun_law-lag_sel_table.tex}
+
+              Based on Information criteria, we should select only one lag.
+          \end{sol}
+
+    \item Estimate \varp{} model for the Okun's law using the command \verb|VAR()| from \verb|vars| package. Use the lag order you chose above.
+
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+
+              \verb|vars| package estimates the \varp{} models, equation by equation. Thus, the code above results in the following two tables:
+
+              The regression equation for unemployment is:
+              \input{../Tex-files-auto/reg_unemployment.tex}
+
+              The regression equation for gdp growth is:
+              \input{../Tex-files-auto/reg_growth.tex}
+          \end{sol}
 
     \item Interpret your results. Do the results seem appropriate?
 
+          \begin{sol}
+              Decreasing the unemployment increases the growth. So, the sign makes sense. However, unemployment is not statistically significant.
+
+              It might be that there is a contemporaneous relationship between unemployment and GDP. However, to analyze this, we need to estimate a \svarp{} model. We will estimate such a model in the next exercise.
+          \end{sol}
+
     \item Check if the \emph{change in unemployment rate} Granger-cause the \emph{GDP growth}?
+
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+
+              The R-codes provide the following result: \texttt{\input{../Tex-files-auto/granger_res.tex}}
+
+              We cannot reject the $H_0$ and therefore, we cannot find any evidence for the Granger-causality.
+
+              Note that the $p$-value we have above is very similar to the $p$-value associated with \texttt{unemployment.l1} in the regression summary for growth. This is because, there is only one lag and $t$-test almost coincides with testing the Granger-causality.
+          \end{sol}
+
+    \item Using \verb|irf(.)| function from \verb|vars|, evaluate the first ten impulse response coefficients. (Set the option \verb|ortho| to \texttt{FALSE}. We will set it to \texttt{TRUE} later on, for \svarp{} models.)
+
+          Plot evaluated IRF and the associated confidence intervals as line.
+
+          \begin{sol}
+              See \texttt{okuns\_law.R}. You will find this file on the Learnweb and also at the last solution.
+          \end{sol}
+
+    \item Find the impulse-response function (or coefficients) "from unemployment" to "growth" by writing the codes yourselves.
+
+          \begin{sol}
+              The R-codes are:
+              %   \lstinputlisting{../R-files/okuns_law.R}
+          \end{sol}
 \end{enumerate}
-
-\begin{sol}
-    \lstinputlisting{../R-files/okuns law.R}
-
-    \verb|vars| package estimates the \varp{} models, equation by equation. Thus, the code above results in the following two tables:
-
-    The regression equation for unemployment is:
-    \input{../Tex-files-auto/reg_unemployment.tex}
-
-    The regression equation for gdp growth is:
-    \input{../Tex-files-auto/reg_growth.tex}
-
-    The data series not transformed look non-stationary, while tranformed ones look stationary. You can formally check for stationarity formally, using tests such as Augmented Dickey-Fuller (ADF) or Kwiatkowski-Phillips-Schmidt-Shin (KPSS). Usually, these two tests are conducted together.
-
-    Decreasing the unemployment increases the growth. So, the sign makes sense. However, unemployment is not statistically significant.
-\end{sol}

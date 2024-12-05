@@ -197,14 +197,17 @@
 
 
 % === Solutions open/closed ===
-%\usepackage{answers}
+% \usepackage{answers}
 \usepackage[nosolutionfiles]{answers}
 
 \renewcommand{\solutionstyle}[1]{\textbf{Sol. #1}:\hspace*{\textwidth}}
-% \newcommand\preSolution{\hfill}
-\newcommand\postSolution{\hfill\textbf{End of solution}\vspace*{0.8cm}}
+\newcommand\preSolution{\vspace*{0.2cm}}
+\newcommand\postSolution{\begin{flushright}\textbf{End of solution}\end{flushright}\vspace*{0.3cm}}
 
 \Newassociation{sol}{Solution}{ans}
+
+% Ouput only a part of the book
+% \usepackage[files, -21]{pagesel}
 
 % === Font ===
 \usepackage{newpxtext, newpxmath}
@@ -231,7 +234,7 @@ The references for this tutorial are
     \item Other explicit citations within the text
 \end{enumerate}
 
-% % === Exercises ===
+% === Exercises ===
 % Notes about matrices
 \section{Notes about matrices\texorpdfstring{%
       \protect\footnote{Based mainly on \cite{MagnusNeudecker-2019-part1} and \cite{MagnusNeudecker-2019-part2}; some parts are from \cite[][]{Hamilton-1994} and \cite[][]{Mutschler-2018-github_repo}}%
@@ -252,40 +255,40 @@ The references for this tutorial are
 \section{From univariate to multivariate models}
 \input{../Exercises/from univariate to multivariate models.tex}
 
-%% Dimensions in VAR models
-%\section{Dimensions in \texorpdfstring{\varp{}}{VAR} models\texorpdfstring{%
-%      \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
-%  }{}
-% }
-%\input{../Exercises/dimensions in var models.tex}
-%
-%% Dimensions in SVAR models
-%\section{Dimensions in \texorpdfstring{\svarp{}}{SVAR} models\texorpdfstring{%
-%      \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
-%  }{}}
-%\input{../Exercises/dimensions in svar models.tex}
-%
-%% Identification in SVAR models
-%\section{Identification in \texorpdfstring{\svar{}}{SVAR} models\texorpdfstring{%
-%      \protect\footnote{Based on \cite[][see pages 332-334]{Hamilton-1994} and \cite[][see chapter 14]{MartinHurnHarris-2012}.}%
-%  }{}}
-%\input{../Exercises/identification in svar models.tex}
-%
-%% Stationarity in univariate case
-%\section{Stationarity in univariate case\texorpdfstring{%
-%      \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
-%  }{}}
-%\input{../Exercises/stationarity in univariate case.tex}
-%
-%\section{Stationarity in multivariate case}
-%\input{../Exercises/stationarity in multivariate case.tex}
-%
-%% Theoretical and simulated moments
-%\section{Theoretical and simulated moments\texorpdfstring{%
-%      \protect\footnote{Taken from \cite[][see Sectiona 18, "Theoretical and simulated moments]{Mutschler-2018-github_repo}}%
-%  }{}}
-%\input{../Exercises/theoretical and simulated moments.tex}
-%
+% Dimensions in VAR models
+\section{Dimensions in \texorpdfstring{\varp{}}{VAR} models\texorpdfstring{%
+      \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
+  }{}
+ }
+\input{../Exercises/dimensions in var models.tex}
+
+% Dimensions in SVAR models
+\section{Dimensions in \texorpdfstring{\svarp{}}{SVAR} models\texorpdfstring{%
+      \protect\footnote{Based on \cite[][see the section 17, titled ``Dimensions and VAR(1) representation'']{Mutschler-2018-github_repo}.}%
+  }{}}
+\input{../Exercises/dimensions in svar models.tex}
+
+% Identification in SVAR models
+\section{Identification in \texorpdfstring{\svar{}}{SVAR} models\texorpdfstring{%
+      \protect\footnote{Based on \cite[][see pages 332-334]{Hamilton-1994} and \cite[][see chapter 14]{MartinHurnHarris-2012}.}%
+  }{}}
+\input{../Exercises/identification in svar models.tex}
+
+% Stationarity in univariate case
+\section{Stationarity in univariate case\texorpdfstring{%
+      \protect\footnote{For more details, see \cite[][see Chapter 3, Stationary ARMA processes]{Hamilton-1994}}%
+  }{}}
+\input{../Exercises/stationarity in univariate case.tex}
+
+\section{Stationarity in multivariate case}
+\input{../Exercises/stationarity in multivariate case.tex}
+
+% Theoretical and simulated moments
+\section{Theoretical and simulated moments\texorpdfstring{%
+      \protect\footnote{Taken from \cite[][see Section 18, ``Theoretical and simulated moments"]{Mutschler-2018-github_repo}}%
+  }{}}
+\input{../Exercises/theoretical and simulated moments.tex}
+
 %% Transforming var to vma
 %\section{Transforming a VAR to a VMA}
 %\input{../Exercises/transforming var to vma.tex}
@@ -296,30 +299,49 @@ The references for this tutorial are
 %  }{}}
 %\input{../Exercises/monte carlo estimation of var models.tex}
 %
-%% Estimation of Okun's Law
-%\section{Estimation of Okun's law\texorpdfstring{%
-%      \protect\footnote{Based on \cite{KissNguyenOesterholm-2023}}%
-%  }{}}
-%\input{../Exercises/okuns law.tex}
+% Estimation of Okun's Law
+\section{Estimation of Okun's law\texorpdfstring{%
+      \protect\footnote{Based on \cite{KissNguyenOesterholm-2023}}%
+  }{}}
+\label{ex-Okun_law-var}
+\input{../Exercises/okuns law.tex}
 
-% Information criteria and Hypothesis tests
+% SVAR: recursive identification
+\section{Recursive Identification of SVAR models\texorpdfstring{%
+      \protect\footnote{Based on \cite[][see Section 29, ``Recursively Identified Models By Short-Run Restrictions"]{Mutschler-2018-github_repo}}%
+  }{}}
+\input{../Exercises/recursively-identified-models-by-short-run-restrictions.tex}
 
-% Granger Causality
+% SVAR: short-run restrictions, long-run restrictions, and their combination
+\section{Restrictions in SVAR\texorpdfstring{ %
+      \protect\footnote{Based on \cite{MartinHurnHarris-2012,Mutschler-2018-github_repo}} %
+  }{}}
+\input{../Exercises/restrictions--short-long-combination.tex}
 
-% IRFs
 
-% Variance Decomposition
+% Estimating Peersman's Model of Oil Price Shocks
+\section{Estimating Peersman's Model of Oil Price Shocks\texorpdfstring{ %
+      \protect\footnote{Based on \cite{MartinHurnHarris-2012,Mutschler-2018-github_repo}} %
+  }{}}
+\input{../Exercises/Peersman_model.tex}
 
-% SVAR: short-run identification
 
-% SVAR: long-run identification
-
-% SVAR: short- and long-run identification
-
-% SVAR: sign restrictions identification
+% Unit root testing with ADF and Phillips-Perron tests
+\section{Unit root testing with ADF and Phillips-Perron tests}
+\input{../Exercises/unit_root.tex}
 
 \Closesolutionfile{ans}
 
+\clearpage
+\printbibliography
+
+\end{document}
+
+
+
+\Closesolutionfile{ans}
+
+\clearpage
 \printbibliography
 
 \end{document}

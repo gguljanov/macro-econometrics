@@ -1,0 +1,118 @@
+In this exercise, we will build and estimate a \svarp{} model to analyze Okun's law. For identification, we need to impose restrictions and in this exercise, we want to impose recursive restrictions.
+
+\begin{enumerate}
+    \item We want to impose recursive restrictions such that (i) the \emph{unemployment rate} is predetermined and (ii) the \emph{unemployment rate} affects the \emph{growth rate}.
+          \[ B_0 y_t = B_1 y_{t-1} + u_t \]
+
+          \begin{enumerate}[label=\roman*.]
+              \item Why imposing zeros on elements of $B_0$ a short-run restriction?
+
+                    \begin{sol}
+                        $B_0$ captures the contemporaneous influence of the elements of $y_t$ on each other. Therefore, it is a short-run restriction.
+                    \end{sol}
+
+              \item Determine $y_t$ and $B_0$.
+
+                    \begin{sol}
+                        The \emph{unemployment rate} should come first, as it is predetermined.
+
+                        The \emph{growth rate} is affected only by the \emph{unemployment rate}. So, it should come second.
+
+                        As a result,
+                        \begin{align*}
+                            y_t & = \begin{pmatrix} l_t \\ g_t \end{pmatrix}
+                            \\[0.2cm]
+                            B_0 & = \begin{bmatrix}
+                                        1           & 0 \\
+                                        b_{0, 2, 1} & 1
+                                    \end{bmatrix}
+                        \end{align*}
+                        where, $g_t$ is growth rate as defined in the equation \ref{eq-gdp-growth_rate} and $l_t$ is percentage change in the unemployment rate.
+                    \end{sol}
+
+              \item Can you interpret all the model shocks with recursive identification?
+
+                    \begin{sol}
+                        With recursive identification procedure, we focus on the effect of an unanticipated increase in the percentage change of \emph{unemployment rate} on the \emph{growth rate}. Only the shock of the \emph{unemployment rate} can be given an economic interpretation.
+                    \end{sol}
+          \end{enumerate}
+
+    \item Estimate the reduced-form vector autoregressive model with \verb|vars| package. Estimate the structural impact multiplier matrix $B_0^{-1}$ based on a lower-triangular Cholesky decomposition of the residual covariance matrix.
+
+          \begin{sol}
+              The matrix $V$ of the reduced form can be estimated as before, using the methods from the reduced form estimation.\footnote{Taken from \cite[][see page 495]{MartinHurnHarris-2012}}. The estimation result is then $\hat V$.
+
+              The Cholesky decomposition of $V$ gives us the lower triangular matrix $S$ and its transpose:
+              \[ V = S S' \Rightarrow \hat V = \hat S \hat S' \]
+
+              The matrix $D$ is a diagonal matrix. Diagonal elements of $D$ is the diagonal elements of $S$. That is how we obtain $\hat D$.
+
+              Using the matrices $\hat S$ and $\hat D$, we can find $\hat B_0$ as follows:
+              \begin{align*}
+                  S   & = B_0^{-1} D^{1/2}  \\
+                      & \Downarrow          \\
+                  B_0 & = (S D^{-1/2})^{-1}
+              \end{align*}
+
+              \lstinputlisting{../R-files/recur_iden.R}
+          \end{sol}
+
+    \item Estimate the structural vector autoregressive model using \verb|SVAR()| command from \verb|vars| package. Use direct minimization of the likelihood and choose \verb|BFGS| as your numerical minimization algorithm.
+
+          \begin{sol}
+              The solution is in the R-file given in the solution above.
+          \end{sol}
+
+    \item Plot the impulse response function of an unexpected increase in the percentage change in the unemplyoment rate, using \verb|vars| package.
+
+          Interpret IRFs economically.
+
+          Then, evaluate the same IRFs manually. Compare your results with those from \verb|vars|.
+
+          \begin{sol}
+              For the usage of \verb|vars|, see the R-codes. Here, we will explain how to obtain orthogonalized IRFs manually.
+              \begin{align*}
+                  B_0 Y_t
+                   & = \mu + B_1 y_{t-1} + \ldots + u_t
+                  \\
+                  Y_t
+                   & = B_0^{-1} \mu
+                  + \underbrace{B_0^{-1} B_1}_{\Phi_1} y_{t-1}
+                  + \ldots
+                  + B_0^{-1} D \eta_t
+              \end{align*}
+              where $\eta_t \sim N(0, I)$.
+
+              Orthogonalized impulse-response means having an impulse in $\eta_t$ rather than in the reduced form shocks.
+
+              You already learned the theoretical aspects and definitions of IRFs in the lecture. Now, we concentrate on obtaining IRFs practically: (i) set first element of $\eta_t$ to $1$ (which corresponds to percentage change in oil price), keeping other elements at zero; (ii) Set $y_{t-1}$, $y_{t-2}$, $\ldots$ to zero; (iii) Run the system without $B_0^{-1} \mu$ for $h$ steps ahead. More details are availabe at \cite[][see pages 319, 322-323]{Hamilton-1994}.
+
+              Interpretation: One-standard deviation shock in the percentage change of unemployment has the effects depicted in the plots.
+          \end{sol}
+
+    \item Plot the impulse response function of an unexpected increase in the unemployment rate (not its percentage change!) using \verb|vars| package.
+
+          \begin{sol}
+              Set \verb|cumulative = TRUE| in the \verb|irf()| command.
+
+              This is equivalent to using \verb|cumsum()| on your manually computed IRFs.
+          \end{sol}
+
+    \item Evaluate the Variance Decomposition for $h=3$, first manually, using the estimation results you obtained above. Then, evaluate it using \verb|vars| package. Compare both results. Lastly, interpret the variance decompositions you obtained.
+
+          \begin{sol}
+              To obtain variance decomposition we use the formula from \cite[][see page 499]{MartinHurnHarris-2012}:
+              \begin{align*}
+                  VD_h = \sum_i^h IRF_i \odot IRF_i
+              \end{align*}
+              See the R-codes for its implementation.
+
+              The first row tells us that the entire variance of $h = 1$ step ahead forecast error in the output equation of the \varp{} is the contribution of unemployment shock. The shock in GDP does not contribute at all
+
+              The second row tells that $0.9775\%$ of the forecast error variance at $h = 2$ is explained by the shock in unemployment. Only $0.0225\%$ is due to the shock in GDP.
+
+              The third row can be interpreted in this fashion as well.
+
+              For more information about interpreting Variance Decomposition, see page 500 of \cite{MartinHurnHarris-2012}.
+          \end{sol}
+\end{enumerate}
