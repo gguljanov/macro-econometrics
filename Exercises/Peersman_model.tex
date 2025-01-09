@@ -1,0 +1,61 @@
+In this exercise, we estimate the Peersman's model presented in the lecture.\footnote{For textbook treatment, \cite[][see page 535]{MartinHurnHarris-2012}.}
+
+The model is:
+\[ B_0 y_t = B_1 y_{t-1} + u_t \]
+with
+\[
+    y_t = \begin{pmatrix}
+        \Delta ln oil_t \\ \Delta ln o_t, \\ \Delta ln p_t \\ r_t
+    \end{pmatrix}.
+\]
+
+You have already seen in the lecture, the $S$-matrix is as follows, after using the short and long run restrictions combined:
+\[
+    \begin{bmatrix}
+        s_{1, 1}
+         & 0
+         & 0
+         & 0
+        \\
+        s_{2, 1}
+         & s_{2, 2}
+         & s_{2, 3}
+         & 0
+        \\
+        s_{3, 1}
+         & s_{3, 2}
+         & s_{3, 3}
+         & -\frac{\phi^{2, 4}}{\phi^{2, 3}} s_{4, 4}
+        \\
+        s_{4, 1}
+         & s_{4, 2}
+         & -\frac{\phi^{2, 2}}{\phi^{2, 4}} s_{2, 3}
+         & s_{4, 4}
+    \end{bmatrix}
+\]
+
+Use the following data:
+\begin{enumerate}[label=--]
+    \item \verb|DCOILWTICO|: Crude Oil Prices: West Texas Intermediate (WTI) - Cushing, Oklahoma; from FRED; Not Seasonally Adjusted; Quarterly - Average; Index Jan $2010=100$
+
+    \item \verb|CLVMNACSCAB1GQDE.csv|: Real Gross Domestic Product for Germany; from FRED; seasonally adjusted; Quarterly; Millions of Chained 2010 Euros
+
+    \item \verb|CP0000DEM086NEST|: Harmonized Index of Consumer Prices: All Items for Germany; from FRED; Index $2015=100$; Not Seasonally Adjusted; Quarterly - End of Period; Adjusted
+
+    \item \verb|IR3TIB01DEM156N|: Interest Rates: 3-Month or 90-Day Rates and Yields: Interbank Rates: Total for Germany; from FRED; Percent; Not Seasonally Adjusted; Quarterly - Average
+\end{enumerate}
+
+
+\begin{enumerate}
+    \item Read, transform, and plot the data.
+
+          \begin{sol}
+              See the R-codes.
+          \end{sol}
+
+    \item Estimate the model.
+
+          \begin{sol}
+              \lstinputlisting{../R-files/peersman_model.R}
+          \end{sol}
+\end{enumerate}
