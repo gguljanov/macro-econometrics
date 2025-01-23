@@ -1,0 +1,60 @@
+In our previous exercises, we plotted the data series and qualitatively judged whether they look stationary or not. In this exercise, we will check them formally using ADF test.
+
+\input{../Tex-files-manual/ADF-H0_H1-table.tex}
+
+Now, let us return to the exercise: Check whether the following time series are stationary.\footnote{The following solutions are heavily based on \cite[][see page 501-504]{Hamilton-1994}}.
+\begin{enumerate}[label=--]
+    \item \begin{enumerate}[label=(\roman*)]
+              \item \verb|CLVMNACSCAB1GQDE.csv|: Real Gross Domestic Product for Germany; from FRED; seasonally adjusted; Quarterly; Millions of Chained 2010 Euros
+
+                    \begin{sol}
+                        Due to population growth and technological progress, we would expect positive upward trend in real gdp, as also seen in the figure.
+
+                        \includegraphics[width=\textwidth]{../Figs/real_gdp_tsplot.pdf}
+
+                        The question is whether this trend arises from a unit root process with drift term:
+                        \[ H_0: y_t = \alpha + y_{t-1} + u_t, \quad \alpha > 0\]
+                        or from a deterministic time trend:
+                        \[
+                            H_1: y_t = \alpha + \delta t + \rho y_{t-1} + u_t,
+                            \quad |\rho| < 1
+                        \]
+
+                        Therefore, for the situation here, the test case 4 is suitable.
+                    \end{sol}
+
+              \item Transform the \emph{GDP} into \emph{growth rate} using the formula below: \[ g_t = 100 (Y_t / Y_{t-1} - 1) \] where $g_t$ is growth rate, $Y_t$ is seasonally adjusted real GDP.
+
+                    \begin{sol}
+                        We would expect GDP growth to move around a constant level, as the figure below also confirms.
+
+                        \includegraphics[width=\textwidth]{../Figs/gdp_growth_tsplot.pdf}
+
+                        The question is whether this arises from a unit root
+                        \[ H_0: y_t = y_{t-1} + u_t \]
+                        or from a stationary process around a constant
+                        \[
+                            H_1: y_t = \alpha + \rho y_{t-1} + u_t,
+                            \quad |\rho| < 1
+                        \]
+
+                        Thus, the case 2 is suitable here.
+                    \end{sol}
+          \end{enumerate}
+
+    \item \begin{enumerate}[label=(\roman*)]
+              \item \verb|LRHUADTTDEQ156S.csv|: Unemployment rate for Germany; from FRED; seasonally adjusted; Quarterly; percent
+
+              \item Transform the \emph{unemployment rate} into the \emph{change in unemployment rate} by taking the first difference.
+          \end{enumerate}
+
+    \item \begin{enumerate}[label=(\roman*)]
+              \item \verb|CP0000DEM086NEST|: Harmonized Index of Consumer Prices: All Items for Germany; from FRED; Index $2015=100$; Not Seasonally Adjusted; Quarterly - End of Period; Adjusted
+
+              \item Log change in Prices
+          \end{enumerate}
+\end{enumerate}
+
+\begin{sol}
+    \lstinputlisting{../R-files/unit_root.R}
+\end{sol}

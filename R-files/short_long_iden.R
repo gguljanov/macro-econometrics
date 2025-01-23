@@ -226,26 +226,58 @@ print(F_hat - long_res$LRIM)
 
 
 # === Short and Long run restrictions together, using Chapter 14.3 of MHH12 ===
-sl_eq <- function(param, V_mat, Phi_1_inv) {
+Phi_1_inv <- solve(diag(2) - Phi1_hat)
+
+get_Smat <- function(param, Phi_1_inv) {
     S_mat <- diag(2)
     S_mat[1, 1] <- param[1]
     S_mat[1, 2] <- param[2]
     S_mat[2, 2] <- -Phi_1_inv[1, 1] / Phi_1_inv[1, 2] * S_mat[1, 2]
 
-    zero_mat <- V_mat - S_mat %*% t(S_mat)
-
-    return(vech(zero_mat))
+    return(S_mat)
 }
 
-Phi_1_inv <- solve(diag(2) - Phi1_hat)
+sl_nlogliki <- function(param, Phi_1_inv, resi) {
+    #
+    # Negative log-likelihood, concentrated version
+    #
 
-sl_eq(param = c(1, 0, 1), var_sum$covres, Phi_1_inv)
+    nobs <- dim(resi)[1]
 
-sl_sol <- nleqslv(x = c(1, 0, 1), fn = sl_eq, V_mat = var_sum$covres)
+    S_mat <- get_Smat(param, Phi_1_inv)
 
-S_sl <- diag(2)
-S_sl[1, 1] <- sl_sol$x[1]
-S_sl[1, 2] <- sl_sol$x[2]
-S_sl[2, 2] <- sl_sol$x[3]
+    V_mat <- S_mat %*% t(S_mat)
 
+    if (det(V_mat) < 1e-10) {
+        return(-Inf)
+    }
+
+    summation_part1 <- resi %*% solve(V_mat)
+    summation <- t(vec(t(summation_part1))) %*% vec(t(resi))
+
+    nloglik_val <- 0.5 * log(det(V_mat)) + 0.5 / (2 * nobs) * summation
+
+    return(nloglik_val)
+}
+
+# Minimizing nlogliki
+sl_sol <- optim(
+    par = c(1, 0.1),
+    fn = sl_nlogliki,
+    method = "Nelder-Mead",
+    Phi_1_inv = Phi_1_inv,
+    resi = residuals(var_res)
+)
+
+print(sl_sol)
+summary(sl_sol)
+
+S_sl <- get_Smat(sl_sol$par, Phi_1_inv)
 print(S_sl)
+
+F_sl <- Phi_1_inv %*% S_sl
+print(F_sl)
+
+V_mat <- S_sl %*% t(S_sl)
+print(V_mat)
+print(var_sum$covres)

@@ -78,7 +78,7 @@ Use the following data:
                        \end{pmatrix}
                   \\[0.2cm]
                   F
-                   & = \Phi(1) S
+                   & = \Phi(1)^{-1} S
                   \\[0.2cm]
                    & \Downarrow
                   \\[0.2cm]
@@ -97,6 +97,14 @@ Use the following data:
                            0        & -\frac{\phi^{1, 1}}{\phi^{1, 2}} s_{1, 2}
                        \end{pmatrix}
               \end{align*}
+
+              As the model is over-identified, the non-linear equation solver from above cannot be used anymore. Instead, we need to maximize the following concentrated log-likelihood:
+              \[
+                  \ln L(\theta) = -\frac{N}{2} \ln 2 \pi
+                  - \frac{1}{2} \ln |V|
+                  - \frac{1}{2 (T - p)} \sum_{t = p + 1}^T \hat \nu_t' V^{-1} \hat \nu_t
+              \]
+              $\hat \nu_t$ comes from the OLS estimation which is the first stage of estimation. Moreover, in the actual estimation, $\bigg(-\frac{N}{2} \ln 2 \pi \bigg)$ can be left out, as it is just a constant number and does not affect the maximization.
 
               The estimation is in the following R-file:
               \lstinputlisting{../R-files/short_long_iden.R}
